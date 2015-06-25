@@ -1,0 +1,27 @@
+﻿@model Cruises.Domain.ViewAdapter.Booking.DiningOptions
+
+@if (!string.IsNullOrEmpty(Model.SelectedSeat) || Model.SelectedTableSize.HasValue)
+{
+   <section class="payment-details">
+        <header>
+            Dining Options
+        </header>
+       <ul>
+           @if (!string.IsNullOrEmpty(Model.SelectedSeat))
+           {
+               <li>    
+                   <strong>Seating Option: </strong>
+                   @this.Html.DisplayFor(m => m.SelectedSeat)
+               </li>
+           }
+           @if (Model.SelectedTableSize.HasValue)
+           {
+              <li>
+                   <strong>Table Size: </strong>
+                   @this.Html.DisplayFor(m => m.SelectedTableSize)
+              </li> 
+           }
+                           
+       </ul>
+    </section> 
+}

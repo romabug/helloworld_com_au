@@ -1,0 +1,278 @@
+﻿@using Cruises.Common
+@using Cruises.Domain.Model
+@using Cruises.Domain.ViewAdapter
+@using System.Threading
+@using Shared.Common.Extentions
+@model Cruises.Domain.ViewAdapter.Search.AdvancedSearchPage
+@{
+    string noPreferenceId;
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;    
+}
+@using (this.Html.BeginForm(MVC.Search.ActionNames.SearchResults, MVC.Search.Name, FormMethod.Post, new { id = "search-form" }))
+{
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.SearchForm.SelectedChildAges)
+
+<div class="advanced-search">
+    <header id="advanced-header">
+        <h2>
+            Advanced Search
+        </h2>
+    </header>
+    <section class="advanced-search-form">
+        <div class="row-advanced-data">
+            <header class="normal active">
+                I will be travelling with...
+            </header>
+            <div class="rad-info toggle-filter-options">
+                <article class="wrapper">
+                    <div class="selection">
+                        <div class="selectAge">
+                            <section class="passengers-ages">
+                                <h4>ADULTS<br />AGES 12+</h4>
+                                <div class="age">
+                                    @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfAdults, new SelectList(Model.NumberOfAdults, "Value", "Text"))
+                                </div>
+                            </section>
+                            <section class="passengers-ages last">
+                                <h4>CHILDREN<br />AGES 0-11</h4>
+                                <div class="age last">
+                                    @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfChildren, new SelectList(Model.NumberOfChildrens, "Value", "Text"))
+                                </div>
+                            </section>
+                        </div>
+                        <div class="childrenAge">
+                            <label>
+                                CHILDREN AGES</label>
+                            <span><span class="selecta">
+                                <select>
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                </select>
+                            </span></span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="row-advanced-data">
+            <header class="normal active">
+                I would like to travel between...
+            </header>
+            <div class="rad-info toggle-filter-options">
+                <strong class="like" style="display:none;">I would like to travel between<span class="from_date">(Please select below)</span>and<span class="to_date">(Please select below)</span></strong>
+                <article id="tab1" class="three-year-dates">
+                   <article class="year b1">
+                        @this.RenderYear(Model.CurrentYear, "cur_year")
+                        <input type="text" name="date_range" style="display: none;">
+                    </article>
+                   <article class="year b1">
+                        @this.RenderYear(Model.CurrentYear + 1, "next_year")
+                    </article>
+                    <article class="year b1">
+                        @this.RenderYear(Model.CurrentYear + 2, "double_next_year")
+                    </article>
+                </article>
+            </div>
+        </div>
+
+        <div class="row-advanced-data">
+            <header class="normal active">
+                I want to cruise to... 
+            </header>
+            <div class="rad-info toggle-filter-options">
+                <div class="ri-top">
+                    <div class="one-fourth-list">
+                        <ul>
+                            <li>
+                                @{
+    noPreferenceId = "region-" + Constants.Search.DefaultPreferenceValue;
+                                }
+                                @this.Html.RadioButtonFor(m => m.SearchForm.SelectedRegion, Constants.Search.DefaultPreferenceValue, new { id = noPreferenceId })
+                                <label for="@noPreferenceId">@Constants.Search.DefaultPreferenceText</label>
+                            </li>
+                        </ul>
+                        <h3>
+                            Close to Home
+                        </h3>
+                            @ShowRegions(Model.CloseToHomeRegionsOptions)
+                        <h3>
+                            Regions and seas
+                        </h3>
+                            @ShowRegions(Model.RegionsAndSeasOptions)
+                    </div>
+                    <div class="one-fourth-list">
+                        <h3>
+                            European regions
+                        </h3>
+                            @ShowRegions(Model.EuropeanRegionsOptions)
+                    </div>
+                    <div class="one-fourth-list">
+                        <h3>
+                            Asian regions
+                        </h3>
+                            @ShowRegions(Model.AsianRegionsOptions)
+                        <h3>
+                            African regions
+                        </h3>
+                            @ShowRegions(Model.AfricanRegionsOptions)
+                    </div>
+                    <div class="one-fourth-list">
+                        <h3>
+                            American regions
+                        </h3>
+                            @ShowRegions(Model.AmericanRegionsOptions)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-advanced-data">
+            <header class="normal">
+                My preferred cruise line is...
+            </header>
+            <div class="rad-info toggle-filter-options hidden">
+                <div class="ri-top">
+                    <ul class="checks1">
+                        <li>
+                            @{
+                                noPreferenceId = "cruiseline-" + Constants.Search.DefaultPreferenceValue;
+                            }
+                            @this.Html.RadioButtonFor(m => m.SearchForm.SelectedCruiseLine, Constants.Search.DefaultPreferenceValue, new { id = noPreferenceId })
+                            <label for="@noPreferenceId">@Constants.Search.DefaultPreferenceText</label>
+                        </li>
+                    </ul>
+                    @{
+                        var columns = 4;
+                        var rows = Math.Ceiling((double)Model.CruiseLineOptions.Count() / columns);
+                    }
+                    @for (int i = 0; i < columns; i++)
+                    {
+                        <div class="one-fourth-list">
+                            <ul>
+                                @for (var j = 0; j < rows && j + i * rows < Model.CruiseLineOptions.Count(); j++)
+                                {
+                                    var item = Model.CruiseLineOptions[(int)(j + i * rows)];
+                                    <li>
+                                            @this.Html.RadioButtonFor(m => m.SearchForm.SelectedCruiseLine, item.Id)
+                                            <label for="@item.Id@item.Name">@item.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }                    
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row-advanced-data">
+            <header class="normal">
+                My preferred number of nights are...
+            </header>
+            <div class="rad-info toggle-filter-options hidden">
+                <div class="one-row">
+                    <ul>
+                        @foreach (Option option in Model.DurationOptions)
+                        {
+                            var id = "duration-" + option.Value;
+                            <li>
+                                @this.Html.RadioButtonFor(m => m.SearchForm.SelectedDuration, option.Value, new { id })
+                                <label for="@id">@option.Text</label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-advanced-data">
+            <header class="normal">
+                My other preferences are...
+            </header>
+            <div class="rad-info toggle-filter-options hidden">
+                <div class="ri-top">
+                    <div class="one-fourth-list">
+                        <h3>
+                            Budget preferences
+                        </h3>
+                        <ul>
+                            @foreach (Option option in Model.BudgetOptions)
+                            {
+                                var id = "budget-" + option.Value;
+                                <li>
+                                    @this.Html.RadioButtonFor(m => m.SearchForm.SelectedBudget, option.Value, new { id })
+                                    <label for="@id">@option.Text</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+    @helper RenderYear(int year, string style)
+    {
+    <strong class="@style">@year</strong>
+    <ul>
+        @foreach (var month in Thread.CurrentThread.CurrentCulture.DateTimeFormat.AbbreviatedMonthNames)
+        {
+            <li><a href="#">@month</a></li>
+        }
+    </ul>
+}
+    <input type="submit" value="UPDATE SEARCH" class="search" />
+    <a href="javascript:void(0)" id="clearSearch">Clear all selections</a>
+</div>
+}
+
+@if (!Model.IsBookingEngineActive)
+{
+    // Apply the styling to disable the advanced search and popular deals
+	<section class="message message-search">
+        <section class="message-content">
+            <img src="/Images/error.png" alt="Error">
+            <h2>Apologies</h2>
+            <p>Our online booking engine is undergoing scheduled maintenance.</p>
+            <p class="yellow">Please try <br> again later.</p>
+        </section>
+    </section>
+    <div class="maintenanceOverlay overlay-search"></div>
+}
+
+<section class="advanced-container">@Html.Partial(MVC.Shared.Views.Widgets._Populars)</section>
+
+@helper ShowRegions(IEnumerable<Option> regions)
+{
+    <ul>
+        @foreach (Option option in regions)
+        {
+            var id = "region-" + option.Value;
+            <li>
+                @this.Html.RadioButtonFor(m => m.SearchForm.SelectedRegion, option.Value, new { id })
+                <label for="@id">@option.Text</label>
+            </li>
+        }
+    </ul>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            hwc_commonsearch.init();
+            hwc_advancedsearch.init();
+            hwc_advancedsearch.defaultPreference = '@Constants.Search.DefaultPreferenceValue';
+            hwc_advancedsearch.defaultNumberOfAdults = '@Constants.Search.DefaultNumberOfAdults';
+            hwc_advancedsearch.defaultNumberOfChildren = '@Constants.Search.DefaultNumberOfChildren';
+            hwc_advancedsearch.defaultDepartureMinDate = '@Constants.Search.DefaultDepartureMinDate.ToString(Constants.Search.IsoDateFormat)';
+            hwc_advancedsearch.defaultDepartureMaxDate = '@Constants.Search.DefaultDepartureMaxDate.ToString(Constants.Search.IsoDateFormat)';
+        });
+    </script>
+}

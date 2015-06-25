@@ -1,0 +1,12 @@
+﻿<div class="leftContainer">
+    @*Polular Cruise Lines*@
+    @Html.Action(MVC.Seo.PopularCruiseLines())
+    @*Polular Ships*@  
+    @Html.Action(MVC.Seo.PopularShips())
+    @*Polular Regions*@  
+    @Html.Action(MVC.Seo.PopularRegions())
+    
+</div>
+<div class="rightContainer">
+    @Html.Action(MVC.Seo.GreatDeals())
+</div>

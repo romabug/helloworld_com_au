@@ -1,0 +1,158 @@
+﻿@using Cruises.Common
+@using Cruises.Domain.ViewAdapter.Search
+@model SearchResultPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;    
+}
+@section HeaderScripts
+{
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            hwc_quicksearch.init();
+            
+            // Reference the auto-generated proxy for the hub.  
+            hwc_searchresults.hub = $.connection.searchHub;
+            hwc_commonsearch.init();
+            hwc_searchresults.init();
+            hwc_searchresults.showResults();
+
+            $.connection.hub.start().done(function() {
+                // convert search criteria to Json
+                var criteriaModel = {
+                    selectedBudget: '@Model.SearchCruisesRequest.SelectedBudget',
+                    selectedCruiseLine: '@Model.SearchCruisesRequest.SelectedCruiseLine',
+                    selectedCruiseType: '@Model.SearchCruisesRequest.SelectedCruiseType',
+                    selectedDepartureMaxDate: '@Model.SearchCruisesRequest.SelectedDepartureMaxDate.ToString(Constants.Search.IsoDateFormat)',
+                    selectedDepartureMinDate: '@Model.SearchCruisesRequest.SelectedDepartureMinDate.ToString(Constants.Search.IsoDateFormat)',
+                    selectedDuration: '@Model.SearchCruisesRequest.SelectedDuration',
+                    selectedNumberOfAdults: @Model.SearchCruisesRequest.SelectedNumberOfAdults,
+                    selectedNumberOfChildren: @Model.SearchCruisesRequest.SelectedNumberOfChildren,
+                    selectedChildAges: '@Model.SearchCruisesRequest.SelectedChildAges',
+                    selectedRegion: '@Model.SearchCruisesRequest.SelectedRegion',
+                    selectedShip: '@Model.SearchCruisesRequest.SelectedShip'
+                };
+
+                hwc_searchresults.search(criteriaModel);
+            });
+        });
+
+        // wrapper because calling javascript:hwc_searchresults.searchByShip directly dosn't work
+
+        function searchByShip(shipId) {
+            hwc_searchresults.searchByShip(shipId);
+        }
+        
+    </script>
+}
+@{ Html.RenderPartial(MVC.Search.Views._SearchResult); }
+<section id="loading-panel">
+    @* TODO: use correct image/style here *@
+    <p align="center">
+    <img src="@Url.Content("~/Images/loading-animation.gif")" alt="loading..." /></p>
+</section>
+<section id="bc-share" style="display: none;">
+    <div>
+        @Html.Partial(MVC.Shared.Views._Breadcrumbs, Model.Breadcrumbs)
+    </div>
+</section>
+<section id="search-panel" style="display: none;">
+    <div>
+        <aside id="cruise-search">
+            <div id="refine-search">
+                <h3>Refine Search</h3>
+                <div class="advanced-search">
+                    @Html.ActionLink("Advanced Search >>", MVC.Search.AdvancedSearch())
+                </div>
+                <div>
+                    <div>
+                        @Html.Partial(MVC.Search.Views._SearchResultQuickSearch, Model.QuickSearchForm)
+                    </div>
+                </div>
+            </div>
+            <div id="filter-cruise-ship">
+                <header>
+                    <h3>
+                        Cruise ship</h3>
+                </header>
+                <div id="shipNameCountFilter" class="toggle-filter-options">
+                </div>
+            </div>
+            <div id="filter-duration">
+                <header>
+                    <h3>
+                        Duration</h3>
+                </header>
+                <div id="durationCountFilter" class="toggle-filter-options">
+                </div>
+            </div>
+            <div id="filter-budget">
+                <header>
+                    <h3>Budget</h3>
+                </header>
+                <div id="budgetCountFilter" class="toggle-filter-options">
+                </div>
+            </div>
+        </aside>
+        <div>
+            <div id="results-sidebar">
+                <section>
+                    <ul>
+                        <li>@*TODO: USP 1*@ </li>
+                        <li>@*TODO: Cruise Chooser*@ </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="result-panel" style="display: none;">
+    <div>
+        <section class="srp-details">
+            <div class="srpd-count">
+                Search Result <span class="cruise-found">(<span id="total-result0"></span> Cruises Found)</span>
+            </div>
+            <div class="srpd-page">
+                Showing <span id="start-row1"></span>-<span id="end-row1"></span> of <span id="total-result1"></span> on this page 
+            </div>
+        </section>
+        <section id="sort-cruise-results">
+            <label>Sort Results by:</label>
+            <ul id="cr-filter-options">
+                <li id="order-price" class="active" data-sort="LeadInPrice">Price (Low to High)</li>
+                <li class="separator">|</li>
+                <li id="order-name" class="normal" data-sort="Name">Name</li>
+                <li class="separator">|</li>
+                <li id="order-date" class="normal" data-sort="DepartureDate">Date</li>
+                <li class="separator">|</li>
+                <li id="order-cruiseline" class="normal" data-sort="CruiselineName">Cruise line</li>
+                <li class="separator">|</li>
+                <li id="order-ship" class="normal" data-sort="ShipName">Ship</li>
+            </ul>
+            <div class="prev-next">
+                <a href="javascript:void(0)" id="prevbtn1">&#171; prev <span id="prev-page-size1"></span></a> | 
+                <a href="javascript:void(0)" id="nextbtn1">next <span id="next-page-size1"></span> &raquo;</a>
+            </div>
+        </section>
+        @* Search Results *@
+        <ul id="search-results">
+        </ul>
+        @* Search Results ends*@
+        <section class="srp-details">
+            <div class="srpd-page">
+                Showing <span id="start-row2"></span>-<span id="end-row2"></span> of <span id="total-result2"></span> on this page 
+            </div>
+        </section>
+        <div class="prev-next-bottom">
+            <a href="javascript:void(0)" id="prevbtn2">&#171; prev <span id="prev-page-size2"></span></a> | 
+            <a href="javascript:void(0)" id="nextbtn2">next <span id="next-page-size2"></span> &raquo;</a>
+        </div>
+    </div>
+</section>
+<section id="noresult-panel" style="display: none;">
+    @Html.Partial(MVC.Search.Views._NoResult, new NoResult { IsBookingEngineActive = Model.QuickSearchForm.IsBookingEngineActive })
+</section>
+<section id="clear">
+</section>

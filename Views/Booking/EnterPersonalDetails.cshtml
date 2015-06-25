@@ -1,0 +1,108 @@
+﻿@using Cruises.Common
+@model Cruises.Domain.ViewAdapter.Booking.BookingWizard
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        (function (hwc_removeextras, $, undefined) {
+            hwc_removeextras.removeExtrasUrl = '@Url.RouteUrl(RouteNames.Booking.RemoveExtras)';
+        } (window.hwc_removeextras = window.hwc_removeextras || {}, jQuery));
+        
+        $(function() {
+            hwc_personaldetails.init();
+            hwc_removeextras.init();
+        });
+    </script>
+}
+
+<article id="cruiseInfo">
+    <section id="specific-deals-details">
+        <div id="spd-main-left">
+            @{ this.Html.RenderPartial(MVC.Booking.Views._CruiseDetail, this.Model.Current.Cruise); }
+        </div>
+        <aside id="cruiseSidebar" class="adjusted">
+            <section id="bookwidget" class="spd-mr-row nights-from">
+              @{ this.Html.RenderPartial(MVC.Booking.Views._PaymentSummaryWidget, this.Model.PriceSummaryWidget, new ViewDataDictionary { { "canRemoveExtras", true } }); }
+            </section>
+        </aside>
+    </section>
+</article>
+
+@{ this.Html.RenderPartial(MVC.Booking.Views._CabinGradeDetail, this.Model.Current.CabinGrade, new ViewDataDictionary { { "showbacklink", true } }); }
+
+@* Step 1 *@
+<section id="book-the-cruise">
+    <header>
+        <h3>
+            Book this cruise
+        </h3>
+        <ul id="booking-steps">
+            <li class="step-number">
+                <span class="step active" id="te-step1">1</span>
+                <label>Your Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal"  id="te-step2">2</span>
+                <label>Traveller Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal">3</span>
+                <label>Payment</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal">4</span>
+                <label>Confirmation</label>
+            </li>
+        </ul>
+    </header>
+    
+    <section id="details-form">
+        @using (this.Html.BeginForm(MVC.Booking.ActionNames.EnterPersonalDetails, MVC.Booking.Name, FormMethod.Post, new { @id = "go-to-step2" }))
+        {
+            <div id="details-form-left">
+                <div id="form-container">
+                    @if (Model.PersonalDetails != null)
+                    {
+                        <div id="details-form-all">
+                            <div>
+                                @Html.EditorFor(m => m.PersonalDetails)
+                                <div class="tte-form-row adjusted-row">
+                                    <div id="subscribe-email">
+                                        <div id="tnc-accept"></div>
+                                        @{
+                                            Model.AddToNewsletter = false;
+                                        }
+                                        @Html.CheckBoxFor(model => model.AddToNewsletter)
+                                        <label>I would like to recieve the newsletter with the latest cruise news and special discounts.</label>
+                                    </div>
+                                    <div id="details-form-errors">
+					                    <span id="booking-form-error">Please check your form for errors</span>
+					                    <input id="submit-tte-form" value="Next" type="submit" />
+				                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    @Html.HiddenFor(m => m.Current.Cruise.SessionId)
+                    @Html.HiddenFor(m => m.Current.Cruise.Id)
+                    @Html.HiddenFor(m => m.Current.CabinGrade.CabinType.Id)
+                    @Html.HiddenFor(m => m.Current.CabinGrade.Id)
+                    @Html.HiddenFor(m => m.Current.CabinId)
+                               </div>
+            </div>
+            <div id="details-form-help">
+			    <h5>Need Help?</h5>
+			    <span>Call 1300 855 024</span>
+			    <p>
+				    Our experienced sales team are on call to assist you
+			    </p>
+		    </div>	
+        }
+    </section>
+</section>

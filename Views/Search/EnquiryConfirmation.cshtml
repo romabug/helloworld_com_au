@@ -1,0 +1,120 @@
+﻿@model Cruises.Domain.ViewAdapter.Enquiry.EnquiryConfirmationPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;
+    var enquiry = Model.Enquiry;
+}
+
+<section id="talk-to-expert">
+    <header>
+	    <h3>
+		    Talk to an expert
+	    </h3>
+	    <ul id="booking-steps">
+		    <li class="step-number">
+			    <span class="step normal" id="te-step1">1</span>
+			    <label>Your Details</label>
+		    </li>
+		    <li class="steps-separator"></li>
+		    <li class="step-number">
+			    <span class="step normal" id="te-step2">2</span>
+			    <label>Other Details</label>
+		    </li>
+		    <li class="steps-separator"></li>
+		    <li class="step-number">
+			    <span class="step active"><img src="/Images/cruise-search/form-tick-active.jpg" alt="tick"></span>
+			    <label>Done</label>
+		    </li>
+	    </ul>
+    </header>
+
+    <section id="enquiry-confirm">
+        <figure>
+            <img src="/Images/sent-confirm.png" alt="SENT">
+        </figure>
+        <div class="content">
+            <div class="confirm">
+                <h3>
+                    Thank you for your enquiry <strong>@enquiry.FirstName</strong>,
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor dictum condimentum. Nulla consectetur imperdiet est quis mattis. 
+                    Aenean molestie eros vitae tellus tincidunt malesuada. Suspendisse quis justo sapien, nec scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+            </div>
+            <div class="print-email">
+                <ul>
+                    <li class="print">
+                        <a href="javascript:window.print()">Print this page &#187;</a>
+                    </li>
+                    @*<li class="email">
+                        <a href="#">Email this page &#187;</a>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+<section id="enquiry-details">
+    <header>Your Details</header>
+    <div class="payment-details-row">
+        <label>
+            First name:
+        </label>
+        <span>
+            @enquiry.FirstName
+        </span>
+    </div>
+    <div class="payment-details-row">
+        <label>
+            Last name:
+        </label>
+        <span>
+            @enquiry.LastName
+        </span>
+    </div>
+    <div class="payment-details-row">
+        <label>
+            Email:
+        </label>
+        <span>
+            @enquiry.Email
+        </span>
+    </div>
+    <div class="payment-details-row">
+        <label>
+            Phone:
+        </label>
+        <span>
+            @enquiry.Phone
+        </span>
+    </div>
+    <div class="payment-details-row">
+        <label>
+            Other Details:
+        </label>
+        <span>
+            @enquiry.Suggestions
+        </span>
+    </div>
+</section>
+@Html.Partial(MVC.Search.Views._SearchDetailInfo, Model.SearchDetail)
+
+<div class="leftContainer">
+    @Html.Partial(MVC.Shared.Views.Widgets._Newsletter)
+    @Html.Partial(MVC.Shared.Views.Widgets._ConnectAndShare)
+
+    @*Polular Cruise Lines*@
+    @Html.Action(MVC.Seo.PopularCruiseLines())
+
+    @*Polular Ships*@  
+    @Html.Action(MVC.Seo.PopularShips())
+
+    @*Polular Regions*@  
+    @Html.Action(MVC.Seo.PopularRegions())
+    
+</div>
+<div class="rightContainer">
+    @Html.Action(MVC.Seo.GreatDeals())
+</div>

@@ -1,0 +1,24 @@
+﻿@model Cruises.Domain.ViewAdapter.Booking.PriceSummaryWidget
+
+<section id="bookwidget" class="spd-mr-row nights-from">
+    <div id="spd-main-right" class="adjusted">
+        <div class="spd-mr-row nights-from">
+            @this.Model.Duration Nights from
+        </div>
+        <div class="spd-mr-row price">
+            <span class="small">$</span>
+            @Math.Round(this.Model.PricePerPerson)
+            <span class="small">pp</span>
+        </div>
+        <div class="spd-mr-row port-charges">
+            Inc. taxes &amp; port charges
+        </div>
+        <div class="spd-mr-row summary">
+            Summary
+        </div>
+
+        @{ this.Html.RenderPartial(MVC.Booking.Views._PaymentSummary, this.Model.Balance, new ViewDataDictionary { { "canRemoveExtras", ViewData["canRemoveExtras"] } }); }
+
+    </div>
+</section>
+

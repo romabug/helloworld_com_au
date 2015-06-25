@@ -1,0 +1,14 @@
+﻿@* Renders a list of Regions *@
+@using Cruises.Domain.Model
+@model IList<Region>
+
+<section class="populerRegions">
+    <h3>Popular Regions</h3>
+    <p>
+        @foreach (Region region in Model)
+        {
+            <a href="@string.Format("/cruises/regions/{0}", region.UrlFriendlyName)"> @region.Name </a>
+            <span>|</span>
+        }
+    </p>
+</section>

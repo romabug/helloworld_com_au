@@ -1,0 +1,27 @@
+@model Cruises.Domain.ViewAdapter.BasePage
+@{
+    Layout = MVC.Shared.Views.Masters._Layout;
+}
+@section HeaderScripts
+{
+    @RenderSection("HeaderScripts", false)
+}
+@section featured
+{
+    @RenderSection("featured", required: false)
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            hwc_timezonecookie.init();
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+}
+
+@RenderBody()
+
+<div class="bottomContainer">
+    @Html.Partial(MVC.Shared.Views._Terms) 
+</div>

@@ -1,0 +1,62 @@
+﻿@using Cruises.Common
+@using Cruises.Domain.ViewAdapter.Search
+@model CabinTypeSummaryItem
+<div class="listing-body">
+    <div class="scg-top-details">
+        <div class="details-header">
+            <div class="scg-image">
+			    <figure>
+				    @if (!string.IsNullOrEmpty(this.Model.ImageUrl))
+                    {
+                        <img src="@this.Model.ImageUrl" alt="@this.Model.Description" title="@this.Model.Description"/>
+                    }
+			    </figure>
+		    </div>
+		    <div class="scg-details">
+			    <h5>@this.Model.Name</h5>
+			    <p>
+				    @this.Model.Description 
+			    </p>
+		    </div>
+		    <div class="scg-prices">
+			    <div class="scg-prices-from">from*</div>
+			    <div class="scg-prices-value"><span class="upper">$</span>@Math.Round(this.Model.CheapestGrade.PricePerPerson)<span class="upper">pp</span></div>
+		    </div>
+		    <div class="scg-book">
+                <a class="book-cabin-grades" href="@this.Url.RouteUrl(RouteNames.Booking.SelectCabin, new { sessionId = this.Model.SessionId, cruiseId = this.Model.CruiseInfoId, cabinTypeId = this.Model.Id, cabinGradeId = this.Model.CheapestGrade.Id })">Book</a>
+		    </div>
+        </div>
+        <div class="scg-see-more">
+            <span class="see-more-deals">See More +</span>
+            <section class="more-cabin-grades">
+                <div class="mcg-row">
+				    <header>
+					    <div class="mcg-departure">Departure</div>
+					    <div class="mcg-cabin">Cabin</div>
+				    </header>
+			    </div>
+                @foreach (CabinGradeSummaryItem grade in this.Model.Grades)
+                {
+                   <div class="mcg-row">
+                        <div class="mcg-departure">
+                            @grade.Departure
+                        </div>
+                        <div class="mcg-cabin">@grade.Code
+                        </div> 
+                        <div class="mcg-price">
+                             @if (grade.PricePerPerson > 0)
+                                {
+                                 <span class="upper">$</span>@Math.Round(grade.PricePerPerson)<span class="upper">pp</span>
+                                }  
+                        </div>
+
+
+                        <div class="mcg-book">
+                            <a class="book-cabin-grades" href="@this.Url.RouteUrl(RouteNames.Booking.SelectCabin, new { sessionId = this.Model.SessionId, cruiseId = this.Model.CruiseInfoId, cabinTypeId = this.Model.Id, cabinGradeId = grade.Id })">Book</a>
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+</div>

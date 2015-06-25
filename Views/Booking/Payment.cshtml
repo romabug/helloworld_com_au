@@ -1,0 +1,114 @@
+
+@using Cruises.Domain.ViewAdapter.Booking
+@model PaymentPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            hwc_payandbook.init();
+        });
+    </script>
+}
+
+@* Step 3*@
+<section id="book-the-cruise">
+	<header>
+		<h3>
+			Payment
+		</h3>
+		 <ul id="booking-steps">
+            <li class="step-number">
+                <span class="step normal" id="te-step1">1</span>
+                <label>Your Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal" id="te-step2">2</span>
+                <label>Traveller Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step active">3</span>
+                <label>Payment</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal">4</span>
+                <label>Confirmation</label>
+            </li>
+        </ul>
+	</header>
+</section>
+
+<section id="book-the-cruise">                           
+    <div id="step1">
+    </div>
+    <div id="step2">
+    </div>
+    <div id="step3">
+        <article id="cruiseInfo">
+            <section id="payment-summary-header">
+                <header>
+                    <span class="summary">Summary</span>
+                    <span class="summary-details">@Model.Current.Cruise.Title</span>
+                </header>
+                <section id="cruise-details-main">
+                    <header>
+                        Cruise Details
+                    </header>
+                    <div id="cdm-left">	    
+                        @{ Html.RenderPartial(MVC.Booking.Views._CruiseSummary, Model.Current.Cruise, new ViewDataDictionary { { "cabinTypeName", Model.Current.CabinGrade.CabinType.Name } }); }                
+                    </div>
+                    <aside id="cruiseSidebar">
+                        @{ Html.RenderPartial(MVC.Booking.Views._PaymentSummaryWidget, Model.PriceSummaryWidget, new ViewDataDictionary { { "canRemoveExtras", false } }); }
+                    </aside>
+                </section>
+            </section>
+        </article>
+        
+        @*Contact Info*@
+        @Html.Partial(MVC.Booking.Views._ContactSummary, Model.PassengersAndOptionsForm.PrimaryPassenger)
+
+        @*Passenger Info*@
+        @Html.Partial(MVC.Booking.Views._PassengerSummary, Model.PassengersAndOptionsForm.Passengers)
+
+        @Html.HiddenFor(m => m.PassengersAndOptionsForm.AreOptionsAvailable)
+        @if (Model.PassengersAndOptionsForm.AreOptionsAvailable)
+        {
+            @*Dining options*@
+            @Html.Partial(MVC.Booking.Views._DiningOptionsSummary, Model.PassengersAndOptionsForm.DiningOptions)
+        }
+
+        @using (Html.BeginForm(MVC.Booking.ActionNames.Payment, MVC.Booking.Name, Model.Current.ToRouteValues(), FormMethod.Post, new { id = "paymentForm" }))
+        {
+            if (Model.Payment.Card != null)
+            {
+                @Html.EditorFor(m => m.Payment.Card)
+            }
+
+            @*Booking payment travellers summary*@
+            <div id="ps-wrapper">
+                <div id="payment-summaries">
+                    @{ Html.RenderPartial(MVC.Booking.Views._FinalPaymentSummary, Model.PriceSummaryWidget.Balance); }
+                   <div class="tnc">
+                        <div id="tnc-accept"></div>
+                        @Html.CheckBox("tnd-payment", false, new { @id = "booking-conditions-check" })<label>I have read and accepted the <a href="#">Booking Conditions</a></label>
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Payment.Total)
+            <div id="versionfied">
+                <a href="" target="_blank"><img src="" /></a>
+                <div id="agree-conditions-message"  style="display: none; color: red;">Please accept the booking terms & conditions</div>
+                <div id="error-message-details"  style="display: none; color: red;">Please check your form for errors</div>
+                <input type="submit" id="sumbit-step-3" value="Pay and Book"/> 
+            </div>
+        }
+    </div>
+    <div id="step4">
+    </div>
+</section>

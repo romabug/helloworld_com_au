@@ -1,0 +1,42 @@
+﻿@model Cruises.Domain.Model.CabinGradeDetail
+
+
+<section id="cabin-grades-content">   
+            @if (Model.Cabins.All(c => c.IsGuaranteed))
+            {
+                <header class="border-bottom guranteed wider">
+                    <h4>Guaranteed Cruise Options</h4>
+                    @Html.Partial(MVC.Search.Views._GuaranteedCabinHelp)
+                </header>
+            }
+            else
+            {
+               
+                <header class="border-bottom standard wider">
+                    <h4>Standard Cruise Booking</h4>
+                    @Html.Partial(MVC.Search.Views._StandardCabinHelp)
+                    <a href="#" class="go-back-link">&laquo; Go back to cabin options</a>
+                </header>
+            }
+                
+        <section id="booking-step-details">
+            <div class="image-wrapper">
+                <figure>
+                    @if (!string.IsNullOrEmpty(Model.CabinType.ImageUrl))
+                    {
+                        <img src="@Model.CabinType.ImageUrl" alt="@Model.CabinType.Description" title="@Model.CabinType.Description"/>
+                    }
+                </figure>
+            </div>
+            <div class="booking-details-wrapper">
+                <h4>@Model.CabinType.Name</h4>                
+                @Model.CabinType.Description               
+            </div>
+            <div class="booking-prices">
+                <div class="bp-from">From*</div> 
+                <div class="bp-price">
+                    <span>$</span>@Math.Round(Model.PricePerPerson)<span>pp</span>
+                </div>
+            </div>
+        </section>
+</section>

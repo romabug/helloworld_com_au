@@ -1,0 +1,706 @@
+body {
+    background: #f2f2f2;
+    font-family:Arial;
+}
+#body {
+    width:920px;
+    padding:20px;
+    background:#fff;
+    position:relative;
+    margin:0 auto;
+}
+
+#payment-summary-header {
+    float:left;
+    width:920px;
+	margin-bottom: 20px;
+       
+       header {
+            float:left;
+            width:100%;
+            margin-bottom:10px;   
+            
+                span {
+                     font-size:24px;
+                     color:#000000;
+                     
+                     &.summary {
+                        font-weight:bold;
+                        padding-right:7px;
+                        border-right:1px dotted #000;
+                     }
+                     
+                     &.summary-details {
+                         padding-left:7px;
+                         font-weight:normal;
+                     }
+                }
+        }
+}
+
+#cruise-details-main{
+    float:left;
+    width:920px;
+        
+        header {
+            background:#dceef9 url(../../../images/cruise-search/down-tick.jpg) no-repeat;
+            font-weight:bold;
+            padding:10px 0 10px 35px;
+            margin:0 0 10px;
+            background-position:8px 8px;
+            width:885px;
+            font-size:23px;
+        }
+        
+        #cdm-left {
+            float:left;
+            width:725px;
+                
+                
+                #cdm-details {
+                    background: #e5e5e5 url(../../../images/cruise-search/border.jpg) repeat-y;
+                    float: left;
+                    width: 100%;
+                    background-position: 140px 0;
+                    
+                    .cdm-left-row {
+                        float:left;
+                        width:100%;
+                        padding:5px 0;
+                        font-size:15px;
+                        line-height:18px;
+                        
+                        &.even-row {
+                            border-bottom:2px solid #fff;    
+                        }
+                        
+                        .cdm-col {
+                             float:left;
+                             margin-left:15px;
+                             color:#000;
+                             
+                             &.small-col {
+                                width:130px;
+                                padding-right:5px;
+                                font-weight:bold;
+                             }
+                             
+                             &.wider-col {
+                                 width:560px;
+                             }
+                        }
+                    }
+                }
+        }
+        
+        aside {
+            float:right;
+            width:180px;
+            background:#666666;
+            height:212px;
+        }
+}
+
+
+#paymentForm {
+    float: left;
+    width: 100%;
+	margin: 20px 0 10px;
+    
+    header {
+        padding: 10px 20px;
+        float: left;
+        width: 880px;
+        background-color: #dceef9;
+        
+        .left {
+            float: left;
+            width: 79%;
+        
+            h2 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #000000;
+            }
+        }
+        
+        .right {
+            float: left;
+            width: 159px;
+        }
+    }
+    
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px dotted #7c7c7c;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    #credit-card-info {
+        padding: 10px 20px;
+        float: left;
+        width: 880px;
+        background-color: #dceef9;
+        
+        .first_row {
+            float: left;
+            width: 100%;
+            margin-bottom: 10px;
+            
+            label {
+                font-size: 13px;
+                color: #000000;
+                text-transform: uppercase;
+                height: 15px;
+                display: block;
+            }   
+            
+            .first_field {
+                float: left;
+                width: 166px;
+                margin-right: 25px;
+                
+                .selectList {
+                    float: left;
+                    padding: 5px 0 0 0;
+                    
+                    .newListSelected {
+                        float: left;
+                        width: 166px;
+                        padding: 0;
+                        height: 25px;
+                        z-index: 999;
+                        cursor: pointer;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        
+                        .selectedTxt {
+                            float: left;
+                            font: bold 14px/33px arial;
+                            color: #666666;
+                            text-transform: uppercase;
+                            height: 25px;
+                            background: url(../../images/payment_arrow.png) no-repeat 92% 13px;
+                            padding: 0 0 0 7px;
+                            width: 97.5%;
+                            cursor: pointer;
+                            margin-top: -3px;
+                        }
+                    }
+                }
+            }
+            
+            .second_field {
+                float: left;
+                width: 231px;
+                margin-right: 25px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 231px;
+                        padding: 0;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+            
+            .third_field {
+                float: left;
+                width: 206px;
+                margin-right: 15px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 196px;
+                        padding: 0 5px;
+                        color: #cccccc;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+            
+            .fourth_field {
+                float: left;
+                width: 206px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 196px;
+                        padding: 0 5px;
+                        color: #cccccc;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+        }
+        
+        .second_row {
+            float: left;
+            width: 100%;
+            margin-bottom: 10px;
+            
+            label {
+                font-size: 13px;
+                color: #000000;
+                text-transform: uppercase;
+                height: 15px;
+                display: block;
+            }   
+            
+            .first_field {
+                float: left;
+                width: 166px;
+                margin-right: 25px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 166px;
+                        padding: 0;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+            
+            .second_field {
+                float: left;
+                width: 231px;
+                margin-right: 25px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 231px;
+                        padding: 0;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+            
+            .third_field {
+                float: left;
+                width: 261px;
+                margin-right: 15px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 250px;
+                        padding: 0 5px;
+                        color: #cccccc;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+            
+            .fourth_field {
+                float: left;
+                width: 136px;
+                
+                .selectList_state {
+                    float: left;
+                    padding: 5px 0 0 0;
+                    margin-right: 10px;
+                    
+                    .newListSelected {
+                        float: left;
+                        width: 150px;
+                        padding: 0;
+                        height: 25px;
+                        z-index: 999;
+                        cursor: pointer;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        
+                        .selectedTxt {
+                            float: left;
+                            font: bold 14px/33px arial;
+                            color: #666666;
+                            text-transform: uppercase;
+                            height: 25px;
+                            background: url(../../images/payment_arrow.png) no-repeat 93% 13px;
+                            padding: 0 0 0 7px;
+                            width: 97.5%;
+                            cursor: pointer;
+                            margin-top: -3px;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .third_row {
+            float: left;
+            width: 100%;
+            margin-bottom: 10px;
+            
+            label {
+                font-size: 13px;
+                color: #000000;
+                text-transform: uppercase;
+                height: 15px;
+                display: block;
+            }   
+            
+            .first_field {
+                float: left;
+                width: 166px;
+                margin-right: 25px;
+                
+                .whatsthis {
+                    float: left;
+                    font-size: 15px;
+                    
+					a {
+						color: #eb212e;
+						text-decoration: underline;
+					}
+					img{
+						margin-bottom: 4px;
+					}
+                }
+            }
+            
+            .second_field {
+                float: left;
+                width: 231px;
+                margin-right: 25px;
+                
+                .selectList_month {
+                    float: left;
+                    padding: 5px 0 0 0;
+                    margin-right: 10px;
+                    
+                    .newListSelected {
+                        float: left;
+                        width: 55px;
+                        padding: 0;
+                        height: 25px;
+                        z-index: 999;
+                        cursor: pointer;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        
+                        .selectedTxt {
+                            float: left;
+                            font: bold 14px/33px arial;
+                            color: #666666;
+                            text-transform: uppercase;
+                            height: 25px;
+                            background: url(../../images/payment_arrow.png) no-repeat 79% 13px;
+                            padding: 0 0 0 7px;
+                            width: 97.5%;
+                            cursor: pointer;
+                            margin-top: -3px;
+                        }
+                    }
+                }  
+                
+                .selectList_year {
+                    float: left;
+                    padding: 5px 0 0 0;
+                    
+                    .newListSelected {
+                        float: left;
+                        width: 75px;
+                        padding: 0;
+                        height: 25px;
+                        z-index: 999;
+                        cursor: pointer;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        
+                        .selectedTxt {
+                            float: left;
+                            font: bold 14px/33px arial;
+                            color: #666666;
+                            text-transform: uppercase;
+                            height: 25px;
+                            background: url(../../images/payment_arrow.png) no-repeat 85% 13px;
+                            padding: 0 0 0 7px;
+                            width: 97.5%;
+                            cursor: pointer;
+                            margin-top: -3px;
+                        }
+                    }
+                }
+            }
+            
+            .third_field {
+                float: left;
+                width: 261px;
+                margin-right: 15px;
+                
+                .selectList_country {
+                    float: left;
+                    padding: 5px 0 0 0;
+                    margin-right: 10px;
+                    
+                    .newListSelected {
+                        float: left;
+                        width: 260px;
+                        padding: 0;
+                        height: 25px;
+                        z-index: 999;
+                        cursor: pointer;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        
+                        .selectedTxt {
+                            float: left;
+                            font: bold 14px/33px arial;
+                            color: #666666;
+                            text-transform: uppercase;
+                            height: 25px;
+                            background: url(../../images/payment_arrow.png) no-repeat 97% 13px;
+                            padding: 0 0 0 7px;
+                            width: 97.5%;
+                            cursor: pointer;
+                            margin-top: -3px;
+                        }
+                    }
+                }
+            }
+            
+            .fourth_field {
+                float: left;
+                width: 136px;
+                
+                .inputField {
+                    float: left;
+                    padding: 5px 0 0 0;   
+                    
+                    input {
+                        float: left;
+                        width: 140px;
+                        padding: 0 5px;
+                        color: #cccccc;
+                        z-index: 999;
+                        cursor: pointer;
+                        height: 25px;
+                        background: #ffffff;
+                        border: 1px solid #cccccc;
+                        border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        -moz-border-radius: 3px;
+                        -o-border-radius: 3px;
+                        behavior: url("css/PIE.htc");
+                    }
+                }
+            }
+        }
+    }
+}
+
+#ps-wrapper{
+    border-top: 1px dotted #000;
+    float: left;
+    width: 920px;
+    padding: 25px 0 0;
+}
+#payment-summaries
+{
+    width: 540px;
+    float: right;
+    margin-right: 50px;
+    color:#2b2d2f;
+}
+
+.ps-leftpcol
+{
+    float:left;
+    width:auto;
+
+	span {
+		font-size: 18px;
+		font-weight: bold;
+	}
+        
+        strong{
+            font-size:18px;   
+        }
+}
+
+.ps-rightpcol
+{
+    float:right;
+    width:240px;
+}
+
+.ps-rightpcol .psr-row{
+   border-bottom: 1px dotted #000;
+    float: left;
+    width: 100%;
+    margin:0 0 5px;
+}
+
+.ps-rightpcol .left-span,
+.ps-rightpcol .right-span
+{
+    margin-bottom:-3px;
+    background:#fff;
+    font-size: 18px;
+}
+
+.ps-rightpcol .left-span
+{
+    float:left;
+    padding-right:1px;
+}
+
+.ps-rightpcol .right-span
+{
+    float:right;  
+    padding-left:1px;
+}
+
+.ps-bottom
+{
+    margin-top:10px;
+    padding:20px 0 10px 0;
+    border-top:1px solid #9eacb0;
+    font-weight:bold;
+}
+
+.st-left
+{
+    float:left;
+}
+
+.total-booking-price
+{
+    font-size:38px;
+    color:#f58227;
+    font-weight:bold;
+    text-align:right;
+    line-height:38px;
+        
+        span{
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 22px;
+            vertical-align: top;
+        }
+}
+
+.no-dotted-lines{
+    border:0 !important;
+}
+
+.psum-row{
+    float:left;
+    width:100%;
+}
+
+#sumbit-step-3{
+    background:#f58227;
+    width:190px;
+    padding:5px 0;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    float:right;
+    border:0;
+    border-radius:5px;
+}
+
+.tnc {
+	float: left;
+}
+
+input#tnd-payment {
+	margin-right: 10px;
+}
+
+.tnc label {
+	font-size: 15px;
+	color: #000000;
+
+	a {
+		color: #1fbae0;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+} 

@@ -1,0 +1,129 @@
+@using Cruises.Domain.ViewAdapter.Booking
+@using Cruises.Common
+@model BookingWizard
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        (function (hwc_removeextras, $, undefined) {
+            hwc_removeextras.removeExtrasUrl = '@Url.RouteUrl(RouteNames.Booking.RemoveExtras)';
+        } (window.hwc_removeextras = window.hwc_removeextras || {}, jQuery));
+
+        $(function () {
+            hwc_passengersandoptions.init();
+            hwc_removeextras.init();
+        });
+    </script>
+}
+
+<article id="cruiseInfo">
+    <section id="specific-deals-details">
+        <div id="spd-main-left">
+        @{ this.Html.RenderPartial(MVC.Booking.Views._CruiseDetail, Model.Current.Cruise); }
+        </div>
+        <aside id="cruiseSidebar" class="adjusted">
+            <section id="bookwidget" class="spd-mr-row nights-from">
+                @{ this.Html.RenderPartial(MVC.Booking.Views._PaymentSummaryWidget, this.Model.PriceSummaryWidget, new ViewDataDictionary { { "canRemoveExtras", true } }); }                
+            </section>
+        </aside>
+    </section>
+</article>
+
+@{ this.Html.RenderPartial(MVC.Booking.Views._CabinGradeDetail, Model.Current.CabinGrade, new ViewDataDictionary { { "showbacklink", true } }); }
+
+@* Step 2 *@
+<section id="talk-to-expert">
+    <header>
+        <h3>
+			Travellers Details
+		</h3>
+        <ul id="booking-steps">
+		    <li class="step-number">
+			    <span class="step normal" id="te-step1">1</span>
+			    <label>Your Details</label>
+		    </li>
+		    <li class="steps-separator"></li>
+		    <li class="step-number sn-wider">
+			    <span class="step active" id="te-step2">2</span>
+			    <label>Traveller Details</label>
+		    </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+			    <span class="step normal" id="te-step3">3</span>
+			    <label>Payment</label>
+		    </li>
+		    <li class="steps-separator"></li>
+		    <li class="step-number">
+			    <span class="step normal"><img src="/Images/cruise-search/form-tick.jpg" alt="tick"></span>
+			    <label>Confirmation</label>
+		    </li>
+	    </ul>
+    </header>
+ </section>                           
+ <section>	  
+    <div>
+        @using (Html.BeginForm(MVC.Booking.ActionNames.EnterPassengerDetails, MVC.Booking.Name, FormMethod.Post, new { @id = "go-to-step3" }))
+        {
+            <div id="step2">
+                <div>
+                    @Html.EditorFor(m => m.PassengersAndOptionsForm.PrimaryPassenger, new { Count = 1 })
+                </div>
+                <div>
+                    @for (int index = 0; index < Model.PassengersAndOptionsForm.SecondaryPassengers.Count(); index++)
+                    {
+                        @Html.EditorFor(m => Model.PassengersAndOptionsForm.SecondaryPassengers[index], new { Count = index + 2 })
+                    }
+                </div>
+                @Html.HiddenFor(m => m.PassengersAndOptionsForm.AreOptionsAvailable)
+                @if (Model.PassengersAndOptionsForm.AreOptionsAvailable)
+                {
+                    <header class="passenger-titles">
+                        Dining Options
+                    </header>
+                    <div class="passenger-details-row pad-bottom">
+                        <p>Please use the form below to choose your dining options</p>
+                        @if (Model.PassengersAndOptionsForm.SeatingOptions != null && Model.PassengersAndOptionsForm.SeatingOptions.Any())
+                        {
+                            <div class="pdr-column dining-options">    
+                                <label>Seating Option</label>
+                                <div class="booking-sel-wrapper country">
+                                    <select id="PassengersAndOptionsForm_DiningOptions_SelectedSeat" name="PassengersAndOptionsForm.DiningOptions.SelectedSeat">
+                                        @foreach (var seating in Model.PassengersAndOptionsForm.SeatingOptions)
+                                        {
+                                            <option name="@seating.Code" value="@seating.Description" data-attr-grats="@seating.IsGratuitiesMandatory" >@seating.Description</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>  
+                        }
+                        
+                        @if (Model.PassengersAndOptionsForm.TableSizeOptions != null && Model.PassengersAndOptionsForm.TableSizeOptions.Any())
+                        {
+                            <div class="pdr-column dining-options">  
+                                <label>Table Size</label>
+                                <div class="booking-sel-wrapper country">
+                                    @this.Html.DropDownListFor(m => m.PassengersAndOptionsForm.DiningOptions.SelectedTableSize, new SelectList(this.Model.PassengersAndOptionsForm.TableSizeOptions))
+                                </div>
+                            </div>
+                        }               
+                    </div>
+                }
+
+                <div class="passenger-details-row">
+                        <header>&nbsp;</header>
+                    <div id="error-message-passengers"  style="display:none;color:red;">Please check your form for errors</div>
+                    <input type="submit" id="sumbit-step-2" value="NEXT"/>
+                </div>                
+            </div>
+            @Html.HiddenFor(m => m.Current.Cruise.SessionId)
+            @Html.HiddenFor(m => m.Current.Cruise.Id)
+            @Html.HiddenFor(m => m.Current.CabinGrade.CabinType.Id)
+            @Html.HiddenFor(m => m.Current.CabinGrade.Id)
+            @Html.HiddenFor(m => m.Current.CabinId)
+            @Html.HiddenFor(m => m.Current.Cruise.SailDate)
+        }
+    </div>
+</section>

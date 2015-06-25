@@ -1,0 +1,10 @@
+﻿@model Cruises.Domain.ViewAdapter.Home.HomePage
+@{
+    this.Layout = MVC.Shared.Views.Masters._SeoLayout;    
+}
+@section Banner
+{
+    @Html.Partial(MVC.Home.Views._Banner)
+}
+@Html.Partial(MVC.Home.Views._Styles)
+@Html.Action(MVC.Seo.GreatDeals())

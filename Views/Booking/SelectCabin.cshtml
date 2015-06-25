@@ -1,0 +1,132 @@
+@using Cruises.Common
+@using Cruises.Domain.Model
+@model Cruises.Domain.ViewAdapter.Booking.SelectCabinPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;
+
+}
+
+@section Scripts
+{
+    <script>
+        hwc_searchdetail.init();
+    </script>
+}
+<section id="specific-product-details">
+	<section id="breadcrumb">
+        <a href="#">Bread</a> <span class="crumb-arrow">&raquo;</span> Crumb
+    </section>
+    <section id="spd-main">
+        <div id="spd-main-left">
+            @{ this.Html.RenderPartial(MVC.Booking.Views._CruiseDetail, Model.Current.Cruise); }
+        </div>
+        <div id="spd-main-right" class="adjusted">
+            <div class="spd-mr-row nights-from">
+                @this.Model.Current.Cruise.Duration Nights From*
+            </div>
+            <div class="spd-mr-row price">
+                <span class="small">$</span>@Math.Round(this.Model.Current.CabinGrade.PricePerPerson)<span class="small">pp</span>
+            </div>
+            <div class="spd-mr-row port-charges">
+                Inc. taxes &amp; port charges
+            </div>
+            <div class="spd-mr-row summary">
+                Summary
+            </div>
+            <div class="spd-mr-row passengers">
+                Adult x <span id="booking-adult-num">@this.Model.Current.Cruise.NumberOfAdults</span>,
+                Child x <span id="booking-children-num">@this.Model.Current.Cruise.NumberOfChildren</span>
+            </div>
+            <div class="spd-mr-row book-now select-cabins">
+                <a href="#">Select Cabin</a>
+            </div>
+        </div>
+    </section>
+</section>
+@{ this.Html.RenderPartial(MVC.Booking.Views._CabinGradeDetail, Model.Current.CabinGrade, new ViewDataDictionary { { "showbacklink", false } }); }
+<section id="available-cabins">
+        <div id="available-cabins-left">
+            <h4>Available cabins</h4>
+            <p>Please choose your cabin:</p>
+            @foreach (Cabin cabin in this.Model.Current.CabinGrade.Cabins)
+            {
+                <section class="available-cabin-row">
+                    <div class="cabin-number">
+                        @cabin.CabinNo
+                    </div>
+                    <div class="cabin-facilities">
+                        <div class="cabin-facilities-row">
+                            <span>Deck: </span>@cabin.Deck
+                        </div>
+                        <div class="cabin-facilities-row">
+                            <span>Facilities: </span>Sleep @cabin.MaxGuests
+                        </div>
+                    </div>
+                    <div class="cabin-add">
+                        <a href="@this.Url.RouteUrl(RouteNames.Booking.EnterPersonalDetails,
+                                     new
+                                     {
+                                         sessionId = this.Model.Current.Cruise.SessionId,
+                                         cruiseId = this.Model.Current.Cruise.Id,
+                                         cabinTypeId = this.Model.Current.CabinGrade.CabinType.Id,
+                                         cabinGradeId = this.Model.Current.CabinGrade.Id,
+                                         cabinId = cabin.Id
+                                     })">Add</a>
+                    </div>
+                </section>
+            }
+            <section id="deck-number-wrapper">
+                <div id="dd-left">
+                    <div>
+                        <h4>Decks</h4>
+                        <ul id="deck-numbers" class="wider">
+                            @{
+                                int deckCounter = 0;
+                                foreach (ShipDeck deck in this.Model.Decks)
+                                {
+                                    if (string.IsNullOrEmpty(deck.ImageUrl))
+                                    {
+                                        continue;
+                                    }
+
+                                @: <li ref-title="deck-num-@deckCounter">@deck.Name</li>
+                                                    deckCounter++;
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+<section id="deck-images-wrapper">  
+    <!-- Deck Images -->
+    <div id="desk-deals">
+    <div id="deck-images">
+        <div>
+            @{ 
+                deckCounter = 0;
+                foreach (ShipDeck deck in this.Model.Decks)
+                {
+                    if (string.IsNullOrEmpty(deck.ImageUrl))
+                    {
+                        continue;
+                    }
+                <div id="deck-num-@deckCounter" class="fd-section">
+                    <h4 class="adjusted-padding">@deck.Name</h4>
+                    <figure>
+                        <img src="@deck.ImageUrl" />
+                    </figure>
+                </div>
+                    deckCounter++;
+                }
+            }
+        </div>
+    </div>
+    </div>
+
+    <!-- Deck Images Ends -->
+</section>
+</section>
+

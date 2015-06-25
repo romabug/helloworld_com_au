@@ -1,0 +1,49 @@
+﻿@model Cruises.Domain.ViewAdapter.Search.QuickSearchViewModel
+@using (this.Html.BeginForm(MVC.Search.ActionNames.SearchResults, MVC.Search.Name, FormMethod.Post, new { id = "search-form" }))
+{
+    @Html.HiddenFor(model => model.SearchForm.SelectedChildAges)
+    <ul class="selectList-search-results">
+        <li class="add">
+            @Html.DropDownListFor(model => model.SearchForm.SelectedFromDate, new SelectList(Model.LeaveFromDates, "Value", "Text"), "LEAVE FROM")
+        </li>
+        <li class="add add1">
+            @Html.DropDownListFor(model => model.SearchForm.SelectedToDate, new SelectList(Model.LeaveToDates, "Value", "Text"), "LEAVE TO")
+        </li>
+        <li>
+            @Html.DropDownListFor(model => model.SearchForm.SelectedRegion, new SelectList(Model.Regions, "Id", "Name"), "REGION")
+        </li>
+        <li>
+            @Html.DropDownListFor(model => model.SearchForm.SelectedCruiseLine, new SelectList(Model.CruiseLines, "Id", "Name"), "CRUISE LINE")
+        </li>
+    </ul>
+    @Html.ValidationSummary()
+    <div class="selectAge">
+        <section class="passengers-ages">
+            <h4>ADULTS<br />AGES 12+</h4>
+            <div class="age">
+                @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfAdults, new SelectList(Model.NumberOfAdults, "Value", "Text"))
+            </div>
+        </section>
+        <section class="passengers-ages last">
+            <h4>CHILDREN<br />AGES 0-11</h4>
+            <div class="age last">
+                @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfChildren, new SelectList(Model.NumberOfChildrens, "Value", "Text"))
+            </div>
+        </section>
+    </div>
+    <div class="childrenAge">
+        <label>
+            CHILDREN AGES</label>
+        <span><span class="selecta">
+            <select>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+            </select>
+        </span></span>
+    </div>
+
+    <input type="submit" id="searchresult_quicksearch_button" value="UPDATE SEARCH" class="search" />
+}

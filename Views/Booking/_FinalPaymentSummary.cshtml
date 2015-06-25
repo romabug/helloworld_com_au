@@ -1,0 +1,41 @@
+﻿@model Cruises.Domain.Model.Booking.PriceSummary
+
+<div class="psum-row">
+    <div class="ps-leftpcol">
+		<strong>Booking Payments for travellers</strong>
+	</div>
+    <div class="ps-rightpcol">
+        <div class="psr-row no-dotted-lines">
+            <span id="booking-adult-num-final" class="left-span">Adult x @Model.NumberOfAdults</span>
+        </div>
+        <div class="psr-row no-dotted-lines">
+            <span id="booking-children-num-final" class="left-span">Child x @Model.NumberOfChildren</span>
+        </div>
+
+        <div class="psr-row">
+			<span class="left-span">Subtotal</span>
+            <span class="right-span">$@Model.SubTotal.ToString("0.00")</span>
+        </div>
+       
+        <div class="psr-row">  
+            @if (Model.Extras.Any())
+            {
+                foreach (var extra in Model.Extras)
+                {
+                    <span class="left-span">@extra.Description:</span>
+                    <span class="right-span">$@extra.Price.ToString("0.00")</span>
+                }
+            }    
+        </div>
+    </div>
+</div>
+<div class="psum-row ps-bottom"> 
+    <div>
+        <div class="ps-leftpcol">
+			<span>Total Payment in Australian Dollars:</span>
+		</div>
+        <div id="totalPayment-final" class="ps-rightpcol total-booking-price">
+            <span>$</span>@Model.Total.ToString("0.00")
+        </div>
+    </div>
+</div>

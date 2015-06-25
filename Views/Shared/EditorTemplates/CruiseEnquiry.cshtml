@@ -1,0 +1,61 @@
+﻿@model Cruises.Domain.Model.Enquiry.CruiseEnquiry
+
+<div id="tte-form-left">
+    <div id="form-container">
+        <div id="tte-form-all" class="">
+            <h4>Your Details</h4>
+            <div class="tte-form-row">
+                <div class="tte-one-half">
+                    <label>First Name*</label>@Html.ValidationMessageFor(m => m.FirstName)
+                    @Html.TextBoxFor(m => m.FirstName)
+                </div>
+                <div class="tte-one-half">
+                    <label>Last Name*</label>@Html.ValidationMessageFor(m => m.LastName)
+                    @Html.TextBoxFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="tte-form-row adjusted-row">
+                <div class="tte-one-half">
+                    <label>Email*</label>@Html.ValidationMessageFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email)
+                </div>
+                <div class="tte-one-half">
+                    <div class="tte-one-half-phone">
+                        <label>Phone</label>
+                        @Html.TextBoxFor(m => m.Phone)
+                    </div>
+                    <div class="tte-one-half-code">
+                        <label>Post Code*</label>@Html.ValidationMessageFor(m => m.Postcode)
+                        @Html.TextBoxFor(m => m.Postcode)
+                    </div>
+                </div>
+            </div>
+            <div class="tte-form-row adjusted-row">
+                <div id="newsletter-option">
+                    @Html.CheckBoxFor(m => m.IsSubscribed)
+                    <label>I would like to recieve the newsletter with the latest cruise news and special discounts.</label>
+                </div>
+                <div id="tte-form-errors">
+                    <span id="booking-form-error" style="display:none;">Please check your form for errors</span>
+                    <input id="submit-tte-form" value="Next" type="button" />
+                </div>
+            </div>
+        </div>
+        <div id="tte-from-step2">
+            <h4>Other Details</h4>
+            <p>
+                Please tell us your preferred dates, passenger details, other requirements etc.*
+            </p>
+            <div class="tte-form-row">
+                @Html.TextAreaFor(m => m.Suggestions)
+            </div>
+            
+            <div class="tte-form-row input-row">
+                <span id="back-step1">Back</span>
+                <input id="send-to-expert" value="send" type="submit" />
+            </div>
+        </div>
+    </div>
+</div>
+@Html.HiddenFor(c => c.SessionId)
+@Html.HiddenFor(c => c.CruiseInfoId)

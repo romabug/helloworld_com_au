@@ -1,0 +1,170 @@
+.fullWidth(){
+    float:left;  
+     width:920px;  
+}
+
+.pie-htc(){
+    behavior: url(/Content/PIE.htc);
+    position:relative;
+}
+
+.roundedBorder (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+.roundedDetails (@top, @left, @bottom, @right) {
+  border-radius: @top @left @bottom @right;
+  -moz-border-radius:  @top @left @bottom @right;
+  -webkit-border-radius:  @top @left @bottom @right;
+}
+
+.marginDetails (@top, @right, @bottom, @left){
+    margin:@top @right @bottom @left;
+}
+
+.paddingDetails (@top, @right, @bottom, @left){
+    padding:@top @right @bottom @left;
+}
+
+.fontSize (@fSize) {
+  font-size: @fSize;
+}
+
+.border-bottom.wider{
+    width:870px !important;
+}
+        
+#booking-step-details{
+     .fullWidth();
+     border-bottom: 1px dotted black;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    
+     .image-wrapper,
+     .booking-details-wrapper{
+        float:left;
+     }
+     
+     .image-wrapper{
+        width:145px;
+        min-height:90px;
+        display:block;   
+           img{
+                width:100%;
+                height:auto;
+            }
+     }
+     
+     .booking-details-wrapper{
+        width:575px;
+        margin:0 0 0 15px;
+		font-size:15px;
+        h4{
+            font-size:18px;
+            font-weight:bold;
+            color:#000;
+            margin:0 0 10px;
+        }
+     }  
+     
+     .booking-prices{
+        width:120px;
+        float:right;
+        text-align:right;
+            
+            .bp-from{
+                color: #000;
+                font-size: 13px;
+                margin-bottom: 5px;
+                text-transform: uppercase;     
+            }
+            
+            .bp-price{
+                 color: #f6820b;
+                font-size: 30px;
+                font-weight: bold;
+                line-height: 32px; 
+                span{
+                    font-size: 13px;
+                    line-height: 19px;
+                    vertical-align: top;   
+                }
+            }
+     }
+    
+}
+
+#available-cabins{
+    .fullWidth();
+    margin-bottom:20px;
+    background: url(../../images/cruise-search/dotted-bg.jpg) repeat-y;
+    background-position: 470px 0;
+    
+        #available-cabins-left{
+            width:450px;
+            float:left;
+                h4{
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: black;   
+                }
+                
+                p{
+                    font-size:15px;
+                    color:#000;
+                    display:block;
+                    margin:10px 0;
+                }
+                
+                .available-cabin-row{
+                    float:left;
+                    width:100%;
+                    padding:5px 0;
+                    border-bottom:1px dotted black; 
+                    
+                    .cabin-number,
+                    .cabin-facilities{
+                        float:left;   
+                    }
+                    
+                    .cabin-number{
+                        width:75px;
+                        font-weight:bold;
+                        font-size:18px;
+                        color: #000000;
+                    }
+                    
+                    .cabin-facilities{
+                        width:280px;
+                        color:#000;
+                        font-size:15px;
+                    }
+                    
+                    .cabin-add{
+                        width:90px;
+                        float:right;
+                            
+                            a{
+                                background:#f6820b;
+                                width:90px;
+                                padding:4px 0;
+                                text-align:center;
+                                color:#fff;
+                                text-transform:uppercase;
+                                display:block;
+								font-size: 15px;
+                                font-weight:bold;
+                                text-decoration:none;
+                                .roundedBorder (3px);
+                            }
+                    }
+                }
+        }
+        
+         #available-cabins-right{
+            width:440px;
+            float:right;  
+        }
+}

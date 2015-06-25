@@ -1,0 +1,9 @@
+﻿@model Cruises.Domain.ViewAdapter.Settings.PanelMessage
+@if (Model.ShowPanelMessage)
+{
+    <div>
+        @Html.DisplayFor(model => model.PanelMessageText)
+        @Html.DisplayFor(mode => Model.PanelMessageFromDate)
+        @Html.DisplayFor(model => model.PanelMessageToDate)
+    </div>
+}

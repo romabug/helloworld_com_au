@@ -1,0 +1,136 @@
+﻿@using Cruises.Domain.ViewAdapter
+@using Shared.Common.Extentions
+@model Cruises.Domain.Model.Booking.PrimaryPassenger
+
+
+<header class="passenger-titles lead-passenger">
+    Travellers
+</header>
+<div class="passenger-details-row">
+    <span class="passenger-count">Traveller @ViewData["Count"] - @Model.Type</span>
+    <div class="pdr-column title-rel">
+        <label>Title</label>
+        <div class="booking-sel-wrapper title">
+            @Html.DropDownListFor(m => m.Title, new SelectList(Options.Titles(), "Value", "Text"))
+        </div>
+    </div>
+    <div class="pdr-column name-rel">
+        <label>First Name*</label>
+        @Html.TextBoxFor(m => m.FirstName)
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="pdr-column name-rel">
+        <label>Last Name*</label>
+        @Html.TextBoxFor(m => m.LastName)
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="pdr-column dob-rel">
+        <label>Date of Birth*</label>
+        @(Html.Kendo().DatePickerFor(model => model.DateOfBirth).Deferred().Format("yyyy/MM/dd").Culture("en-AU").Min(DateTime.UtcNow.AddYears(-100).Date).Max(DateTime.UtcNow.Date))
+        @Html.ValidationMessageFor(m => m.DateOfBirth)
+    </div>
+    
+    <div class="pdr-column nation-rel">
+        <label>Nationality*</label>
+        <div class="booking-sel-wrapper nationality">
+            @Html.DropDownListFor(m => m.Nationality, new SelectList(Options.Countries(), "Value", "Text"))
+        </div>
+        @Html.ValidationMessageFor(m => m.Nationality)
+    </div>
+</div>
+<!-- Passport Info -->
+<div class="passenger-details-row">
+    @if (Model.IsPassportInfoRequired)
+    {
+        <div class="pdr-column passport-number">
+            <label>Passport number*</label>
+            @Html.TextBoxFor(m => m.PassportNumber)
+            @Html.ValidationMessageFor(m => m.PassportNumber)
+        </div>
+        <div class="pdr-column passport-valid-dates">
+            <label>Passport issue date*</label>
+            @(Html.Kendo().DatePickerFor(model => model.PassportIssueDate).Deferred().Format("yyyy/MM/dd").Culture("en-AU").Min(DateTime.UtcNow.AddYears(-100).Date).Max(DateTime.UtcNow.Date))
+            @Html.ValidationMessageFor(m => m.PassportIssueDate)
+        </div>
+        <div class="pdr-column passport-valid-dates">
+            <label>Passport expiry date*</label>
+            @(Html.Kendo().DatePickerFor(model => model.PassportExpiryDate).Deferred().Format("yyyy/MM/dd").Culture("en-AU").Min(DateTime.UtcNow.Date).Max(DateTime.UtcNow.AddYears(50).Date))
+            @Html.ValidationMessageFor(m => m.PassportExpiryDate)
+        </div>
+        <div class="pdr-column passport-issuer">
+            <label>Passport issuer*</label>
+            <div class="booking-sel-wrapper nationality">
+                @Html.DropDownListFor(m => m.PassportIssuingCountry, new SelectList(Options.Countries(), "Value", "Text"))
+            </div>
+            @Html.ValidationMessageFor(m => m.PassportIssuingCountry)
+        </div>
+    }
+</div>
+<!-- Contact Info -->
+<div class="passenger-details-row">
+    <div class="pdr-left-wrap">
+        <div class="pdr-left longer-rel">
+            <label>Email Address*</label>
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="pdr-left longer-rel">
+            <label>Confirm your email address*</label>
+            @Html.TextBoxFor(m => m.EmailConfirmation)
+            @Html.ValidationMessageFor(m => m.EmailConfirmation)
+        </div>
+        <div class="pdr-left longer-rel even">
+            <label>Phone Number*</label>
+            @Html.TextBoxFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+    </div>
+    <div class="pdr-right">
+        <div class="pdr-left">
+            <div class="pdr-column address-rel">
+                <label>Address*</label>
+                @Html.TextBoxFor(m => m.Address1)
+                @Html.ValidationMessageFor(m => m.Address1)
+            </div>
+            <div class="pdr-column address-rel even">
+                <label>&nbsp;</label>
+                @Html.TextBoxFor(m => m.Address2)
+            </div>
+        </div>
+
+        <div class="pdr-left">
+            <div class="pdr-column pc-suburb">
+                <label>Suburb*</label>
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class="pdr-column pc-state even">
+                <label>State*</label>
+                <div class="booking-sel-wrapper state">
+                    @Html.TextBoxFor(m => m.State)
+                </div>
+                @Html.ValidationMessageFor(m => m.State)
+            </div>
+        </div>
+
+        <div class="pdr-left">
+            <div class="pdr-column pc-suburb">
+                <label>Country</label>
+                <div class="booking-sel-wrapper nationality">
+                    @Html.DropDownListFor(m => m.Country, new SelectList(Options.Countries(), "Value", "Text"))
+                    @Html.ValidationMessageFor(m => m.Country)
+                </div>
+            </div>
+            <div class="pdr-column  pc-state even">
+                <label>Post code*</label>
+                @Html.TextBoxFor(m => m.Postcode)
+                @Html.ValidationMessageFor(m => m.Postcode)
+            </div>
+        </div>
+    
+    </div>
+</div>
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.Primary)
+@Html.HiddenFor(m => m.Type)
+@Html.HiddenFor(m => m.IsPassportInfoRequired, new { @id = "IsPassportInfoRequired" })

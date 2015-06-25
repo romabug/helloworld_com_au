@@ -1,0 +1,52 @@
+﻿@model Cruises.Domain.ViewAdapter.Search.CabinTypeSummary
+@* The reason we use a partial here is so we can render this entire container via ajax *@
+
+<script type="text/javascript">
+    $(function () {
+        hwc_searchdetail.init();
+    });	
+</script>
+
+@if (Model.NotFound)
+{
+    <h3>Cabin information is un-available</h3>
+}
+else
+{
+ <section id="cabin-grades-content">   
+    <span class="cgc-header">Choose a cabin type</span>
+    <div id="cabinGradesUpdate">
+        @if (Model.Guaranteed.Any())
+        {            
+            <section class="cabin-grade-types">
+                <header class="border-bottom">
+					<h4>Guaranteed Cruise Options</h4>
+                    @Html.Partial(MVC.Search.Views._GuaranteedCabinHelp)
+				</header>
+                <section class="specific-cabin-grades">
+                    <div class="guaranteed">
+                        @* Use a display template so we don't have to loop *@
+                        @Html.DisplayFor(m => m.Guaranteed)
+                    </div>
+                </section>
+            </section>
+        }
+        @if (Model.Standard.Any())
+        {
+           <section class="cabin-grade-types">
+                <header class="border-bottom standard">
+                    <h4>Standard Cruise Booking</h4>
+                    @Html.Partial(MVC.Search.Views._StandardCabinHelp)
+				</header>
+                <section class="specific-cabin-grades">
+                    <div class="standard">
+                        @* Use a display template so we don't have to loop *@
+                        @Html.DisplayFor(m => m.Standard)
+                    </div>
+                </section>
+            </section>
+        }
+    </div>  
+</section>  
+}
+

@@ -1,0 +1,37 @@
+﻿@model Cruises.Domain.Model.Booking.PrimaryPassenger
+
+<section class="payment-details">
+    <header>
+		Contact Details
+	</header>
+    <!-- row and loop -->
+    <div class="payment-details-row">
+        <label>Telephone:</label>
+        <span>@Model.Phone</span>
+    </div>
+    <div class="payment-details-row">
+        <label>Email Address:</label>
+        <span >@Model.Email</span>
+    </div>
+    <div class="payment-details-row">
+        <label>Address:</label>
+        <span>@Model.Address1</span>
+    </div>
+    <div class="payment-details-row">
+        <label>Suburb:</label>
+        <span>@Model.City</span>
+    </div>
+    <!-- row and loop -->
+    <div class="payment-details-row">
+        <label>Post code:</label>
+        <span>@Model.Postcode</span>
+    </div>   
+    <div class="payment-details-row">
+        <label>State:</label>
+        <span >@Model.State</span>
+    </div>
+    <div class="payment-details-row">
+        <label>Country:</label>
+        <span >@Model.Country</span>
+    </div>
+</section>

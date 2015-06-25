@@ -1,0 +1,19 @@
+/*
+* CSS file for IE
+*/
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input {
+  height: 25px;
+  border: 1px solid #dedede;
+}
+.k-picker-wrap .k-select, .k-picker-wrap .k-select {
+    height: 25px;
+    left: 0px;
+    width:26px;
+}
+.k-i-calendar {
+  background-image: url('../../images/calendar-icon.png') !important;
+  width: 26px;
+  height: 25px;
+}

@@ -1,0 +1,39 @@
+﻿@model Cruises.Domain.Model.Booking.PriceSummary
+
+<div class="spd-mr-row passengers">
+    Adults x <span id="booking-adult-num">@Model.NumberOfAdults</span>
+    Child x <span id="booking-children-num">@Model.NumberOfChildren</span>
+</div>
+
+<div class="spd-mr-row subtotal">
+    Subtotal: .........$@Model.SubTotal.ToString("0.00")
+</div>
+       
+<div class="spd-mr-row gratuties">     
+    @if (Model.Extras.Any())
+    {
+        foreach (var extra in Model.Extras)
+        {
+            <div id="@string.Format("optionalExtra_{0}", extra.Id)">
+                @*@extra.Description*@ Gratuties: ......<span>$@extra.Price.ToString("0.00")</span>  
+                @if ((bool)ViewData["canRemoveExtras"] && !extra.IsMandatory)
+                {
+                    <span class="remove">
+                        <div id="@string.Format("removeExtras_{0}_{1}", extra.Id, extra.Group.ToString())">
+                            <span><img src="/Images/remove.png" alt="Remove gratuties"></span>
+                            @Html.Hidden(string.Format("extraId_{0}", extra.Id), extra.Id)
+                        </div>
+                    </span>
+                }
+            </div>
+        }
+    }    
+</div>
+<hr />
+<div class="spd-mr-row total"> 
+    <div>
+        <span class="total-label">Total:</span>
+        <div id="totalPayment"><span class="total-amount">$@Model.Total.ToString("0.00")</span></div>
+        @Html.HiddenFor(m => m.Total, new { @id = "fullAmount"})
+    </div>
+</div>

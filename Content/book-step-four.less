@@ -1,0 +1,381 @@
+body {
+    background: #f2f2f2;
+    font-family:Arial;
+}
+#body {
+    width:920px;
+    padding:20px;
+    background:#fff;
+    position:relative;
+    margin:0 auto;
+}
+
+#payment-summary-header {
+    float:left;
+    width:920px;
+       
+       header {
+            float:left;
+            width:100%;
+            margin-bottom:10px;   
+            
+                span {
+                     font-size:24px;
+                     color:#000000;
+                     
+                     &.summary {
+                        font-weight:bold;
+                        padding-right:7px;
+                        border-right:1px dotted #000;
+                     }
+                     
+                     &.summary-details {
+                         padding-left:7px;
+                         font-weight:normal;
+                     }
+                }
+        }
+}
+
+#cruise-details-main{
+    float:left;
+    width:920px;
+        
+        header {
+            background:#dceef9 url(images/down-tick.jpg) no-repeat;
+            font-weight:bold;
+            padding:10px 0 10px 35px;
+            margin:0 0 10px;
+            background-position:8px 8px;
+            width:885px;
+        }
+        
+        #cdm-left {
+            float:left;
+            width:725px;
+                
+                
+                #cdm-details {
+                    background: #e5e5e5 url(images/border.jpg) repeat-y;
+                    float: left;
+                    width: 100%;
+                    background-position: 140px 0;
+                    
+                    .cdm-left-row {
+                        float:left;
+                        width:100%;
+                        padding:4px 0;
+                        font-size:15px;
+                        line-height:18px;
+                        
+                        &.even-row {
+                            border-bottom:2px solid #fff;    
+                        }
+                        
+                        .cdm-col {
+                             float:left;
+                             margin-left:15px;
+                             color:#000;
+                             
+                             &.small-col {
+                                width:130px;
+                                padding-right:5px;
+                                font-weight:bold;
+                             }
+                             
+                             &.wider-col {
+                                 width:560px;
+                             }
+                        }
+                    }
+                }
+        }
+        
+        aside {
+            float:right;
+            width:180px;
+            background:#666666;
+            height:212px;
+        }
+}
+
+.payment-details{
+    float:left;
+    width:100%;
+	margin-bottom: 20px;
+         
+         header {
+            background: #dceef9 url(../../../images/cruise-search/down-tick.jpg) no-repeat;
+			font-weight: bold;
+			padding: 10px 0 10px 35px;
+			margin: 0 0 10px;
+			background-position: 8px 8px;
+			width: 885px !important;
+			font-size: 23px;
+        }
+        
+        li{
+            display:block;
+            list-style:none;
+			font-size: 16px;
+        }
+        
+        .payment-details-row{
+            float:left;
+            width:100%;
+            padding:3px 0;
+            margin:0 0 5px;
+            
+            &.top{
+                font-weight:bold;   
+            }
+            
+            span{
+                float:left;
+                margin:0 10px 0 0;
+				font-size: 16px;
+
+				a {
+					color: #1fbae0;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+                
+                &.name{
+                    width:220px;
+                }
+                
+                &.dob{
+                    width:120px;
+                }
+                
+                &.nationality{
+                    width:80px;
+                }
+                
+                &.passport-num{
+                    width:105px;
+                }
+                
+                &.start-date{
+                    width:100px;
+                }
+                
+                &.end-date{
+                    width:100px;
+                }
+                
+                &.issuer{
+                    width:120px;
+                    margin:0;
+                }
+            }
+            
+            label{
+                float:left;
+                width:160px;
+                margin-right:5px;
+                font-weight:bold;
+				font-size: 16px;
+            }
+        }
+}
+
+//step 4 css
+
+#booking-pricing-details{
+    border-top: 1px dotted #000;
+    float: left;
+    width: 920px;
+    padding: 25px 0 0;
+}
+#payment-summaries
+{
+    width: 540px;
+    float: right;
+    margin-right: 50px;
+    color:#2b2d2f;
+}
+
+.ps-leftpcol
+{
+    float:left;
+    width:285px;
+        
+        strong{
+            font-size:18px;   
+        }
+}
+
+.ps-rightpcol
+{
+    float:right;
+    width:210px;
+}
+
+.ps-rightpcol .psr-row{
+   border-bottom: 1px dotted #000;
+    float: left;
+    width: 100%;
+    margin:0 0 5px;
+}
+
+.ps-rightpcol .left-span,
+.ps-rightpcol .right-span
+{
+    margin-bottom:-3px;
+    background:#fff;
+    font-size: 18px;
+}
+
+.ps-rightpcol .left-span
+{
+    float:left;
+    padding-right:1px;
+}
+
+.ps-rightpcol .right-span
+{
+    float:right;  
+    padding-left:1px;
+}
+
+.ps-bottom
+{
+    margin-top:10px;
+    padding:20px 0;
+    border-top:1px solid #9eacb0;
+    font-weight:bold;
+}
+
+.st-left
+{
+    float:left;
+}
+
+.total-booking-price
+{
+    font-size:38px;
+    color:#f58227;
+    font-weight:bold;
+    text-align:right;
+    line-height:38px;
+        
+        span{
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 22px;
+            vertical-align: top;
+        }
+}
+
+.no-dotted-lines{
+    border:0 !important;
+}
+
+.psum-row{
+    float:left;
+    width:100%;
+}
+
+#cruiseInfo #cruiseSidebar .spd-mr-row {
+	float: left;
+	width: 100%;
+	font-weight: normal;
+	font-size: 14px;
+	
+	.congrats {
+		color: #ffffff;
+		font-size: 20px;
+		font-weight: bold;
+		margin: 5px 0 3px 0;
+		text-transform: none;
+	}
+
+	.iti-label {
+		color: #ffffff;
+		font-size: 11px;
+		font-weight: bold;
+		margin: 5px 0 3px 0;
+		text-transform: uppercase;
+	}
+}
+
+#sent {
+	float: left;
+	width: 100%;
+	margin: 0 0 20px;
+
+	figure {
+		width: 146px;
+		float: left;
+		margin-right: 20px;
+	}
+
+	.content {
+		width: 754px;
+		float: left;
+		margin: 10px 0 0 0;
+
+		.confirm {
+			width: 100%;
+			float: left;
+			margin: 0 0 22px 0;
+
+			h3 {
+				color: #000000;
+				font-size: 18px;
+				font-weight: bold;
+				margin: 0 0 15px 0;
+			}
+
+			p {
+				color: #000000;
+				font-size: 14px;
+				font-weight: normal;
+			}
+		}
+
+		.print-email {
+			width: 100%;
+			float: left;
+
+			ul {
+				width: 100%;
+
+				li {
+					float: left;
+					clear: none;
+					color: #1fbae0;
+					font-size: 14px;
+					font-weight: bold;
+
+					&.print {
+						padding: 3px 0 0 30px;
+						background:url(../../../images/print-icon.png) no-repeat 0 0 transparent;
+						height: 25px;
+						margin-right: 35px;
+					}
+
+					&.email {
+						padding: 3px 0 0 30px;
+						background:url(../../../images/email-icon.png) no-repeat 0 0 transparent;
+						height: 25px;
+					}
+
+					a {
+						color: #1fbae0;
+						text-decoration: none;
+
+						&:hover {
+						 text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+	}
+}

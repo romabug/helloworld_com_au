@@ -1,0 +1,23 @@
+﻿@model Cruises.Domain.ViewAdapter.Search.NoResult
+
+<section class="noResult">
+    <h1>No Result</h1>
+    <article class="message">
+        <section class="message-content">
+            <img src="/Images/error.png" alt="Error">
+            <h2>Apologies</h2>
+            <p>We could not find any cruises.</p>
+            <p class="yellow">Please try a different search.</p>
+        </section>
+    </article>
+    
+    <div>
+        <h2>Most Popular Cruises</h2>
+        @Html.Action(MVC.Seo.PopularDeals())
+    </div>
+</section>
+
+@if(!Model.IsBookingEngineActive)
+{
+    //Apply the styling to disable the deals
+}

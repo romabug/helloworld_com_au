@@ -1,0 +1,618 @@
+body{
+    background:#dceef9;  
+    font-family:Arial;
+}
+#clear{
+    clear:both;
+    float:left;
+    width:100%;
+}
+
+.no-display{
+    display:none;    
+}
+
+figure{
+    padding:0;
+    margin:0;
+}
+
+.no-bg{
+    border:0 !important;   
+}
+//common global properties as mixins - mixins referring to common reusable classes
+
+.pie-htc(){
+    behavior: url(/Content/PIE.htc);
+    position:relative;
+}
+
+.float-left(){
+    float:left;   
+}
+
+.float-right(){
+    float:right;   
+}
+
+.width-all(){
+    width:100%;
+}
+
+.margin-zero(){
+    margin:0;
+}
+
+.padding-zero(){
+    margin:0;
+}
+
+.right-align(){
+    text-align:right;
+}
+
+.commonDarkOrgangeFont(){
+    color:#f6820b;   
+}
+
+.commonDarkOrgangeBackground(){
+    background:#f7830c; 
+}
+//parametric mixins - most commonly used properties objectify - parametric mixins takes parameters - function-esque
+
+.roundedBorder (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+.roundedDetails (@top, @left, @bottom, @right) {
+  border-radius: @top @left @bottom @right;
+  -moz-border-radius:  @top @left @bottom @right;
+  -webkit-border-radius:  @top @left @bottom @right;
+}
+
+.marginDetails (@top, @right, @bottom, @left){
+    margin:@top @right @bottom @left;
+}
+
+.paddingDetails (@top, @right, @bottom, @left){
+    padding:@top @right @bottom @left;
+}
+
+.fontSize (@fSize) {
+  font-size: @fSize;
+}
+//parametric mixins - most commonly used properties objectify - parametric mixins takes parameters - function-esque ends 
+
+//specific product details page
+
+
+#cruiseInfo{
+    float:left;
+    width:100%;
+    margin:0 0 3px;
+        
+        h1{
+            padding:0;
+            margin:0 0 24px;
+            color:#000;
+            font-size:25px;
+        }
+        
+        #spd-main-left{
+            .float-left();
+            width:720px;
+        }
+        
+        .spd-ml-image{
+            .float-left();
+            width:336px;
+            height: 212px;
+            overflow: hidden;
+
+                img{
+                    max-width:336px;
+                    height:212px;
+                }
+        }
+        
+        .spd-ml-details{
+            border-top:1px dotted #000;
+            border-bottom:1px dotted #000;
+            .float-right();
+            height:190px;
+            width:365px;           
+            .paddingDetails (10px, 0, 10px, 0);
+                
+            .dd-row,
+            .dd-row label,
+            .dd-row-right{
+                float:left;   
+            }
+                             
+            .dd-row{
+                width:100%;
+                color:#000;
+                font-size:14px;
+                a{
+                    color:#000;
+                    text-decoration:none;
+                }
+                label{
+                     width:130px;   
+                    }
+                .dd-row-right{
+                    width:230px;
+                }
+            }
+        }
+        
+        #cruiseSidebar{
+            background:#666666;
+            .float-right();
+            min-height:192px;
+            .paddingDetails (9px, 10px, 9px, 10px);
+            .roundedBorder(5px);
+            width:170px;           
+            position:relative;
+			height: auto;  
+           &.adjusted{
+            margin-top:40px;
+           }
+            #lightbox-wrapper{
+                        background: url(../../images/cruise-search/lightbox-wrapper.png) repeat;
+                        display:none;
+                        position:fixed;
+                        top:0;
+                        left:0;
+                        width:100%;
+                        height:100%;
+                        z-index:99;
+                    }
+                    
+                    #changed-passenger-details{
+                        background:#dceef9;
+                        display:none;
+                        padding:20px;
+                        position:absolute;
+                        left: -189px;
+                        top: 105px;
+                        z-index:100;
+                        width:150px;
+                        .roundedDetails (15px, 0, 15px, 15px);
+                        ul{
+                            padding:10px 0 20px;    
+                        }
+                    } 
+                    
+                    #lightbox-close{
+                        background:#f58227;
+                        padding:5px 8px;
+                        //  z-index:10000;
+                        position:absolute;
+                        right:0;
+                        top:0;
+                        cursor:pointer;
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: #fff;
+                    }
+            
+                    #change-passengers-number{
+                        background:#f58227;
+                        color:#fff;
+                        cursor:pointer;
+                        font-size:14px;
+                        font-weight:bold;
+                        text-transform:uppercase;
+                        width:150px;
+                        float:left;
+                        text-align:center;
+                        padding:5px 0;
+                        .roundedBorder (3px) 
+                    }
+               
+                    .spd-mr-row{
+                        float:left;
+                        width:100%;
+						font-weight: normal;
+						font-size: 14px;
+                    }
+                    
+                    .port-charges{
+                        color:#fff;  
+						font-size: 13px !important;
+						text-transform: none !important; 
+                    }
+                    .nights-from{
+                        color:#fff;
+                        font-size:15px;
+                        font-weight:normal;
+                        text-transform:uppercase;
+                    }
+                
+                .price{
+                    color:#fff; 
+                    font-size:45px;
+                    font-weight:bold;
+                    line-height:40px;
+                    margin-top: 5px;
+
+                    .small{
+                        font-size:16px;
+                        line-height:22px;
+                        font-weight:normal;
+                        vertical-align:top;
+                    }
+                }
+                
+                .summary{
+                    .commonDarkOrgangeFont();
+                    font-size:16px;
+                    font-weight:bold;
+                    text-transform:uppercase;
+					margin: 5px 0 3px 0;
+                }
+                
+                .passengers{
+                    color:#fff;   
+					text-transform: none !important;
+					margin-bottom: 4px;
+                }
+
+				.subtotal{
+                    color:#fff;   
+					text-transform: none !important;
+					margin-bottom: 4px;
+                } 
+
+				.gratuties{
+                    color:#fff;   
+					text-transform: none !important;
+					margin-bottom: 4px;
+
+					.remove {
+						float: right;
+						cursor: pointer;
+					}
+                }
+				
+				hr {
+					display: block;
+					height: 1px;
+					border: 0;
+					border-top: 1px dotted #ffffff;
+					margin: 0.5em 0 0.3em 0;
+					padding: 0;
+					width: 100%;
+				} 
+
+				.total{
+                    .commonDarkOrgangeFont();
+                    font-size:21px;
+                    font-weight:bold;
+                    text-transform:uppercase;
+
+					.total-label {
+						float: left;
+					}
+
+					.total-amount {
+						float: right;
+					}
+                }
+				               
+                .change-passengers{
+                    position:relative;
+                        a{
+                            color:#00bbe6;
+                            font-size:14px;
+                            text-decoration:none;
+                        } 
+                }
+                
+                .book-now{
+                    a{
+                        background: #f6820b  url(../../images/cruise-search/drop-down.png) center bottom no-repeat;
+                        color: white;
+                        display: block;
+                        margin: 10px 0 0;
+                        padding: 5px 10px;
+                        text-align:center;
+                        border-radius: 5px;
+                        font-size:14px;
+                        -moz-border-radius: 5px;
+                        -webkit-border-radius: 5px;
+                        width: 144px;
+                        font-weight: bold;
+                        text-decoration: none;
+                        font-size: 14px;
+                        background-position: 122px 9px;
+                        margin-top:20px;
+                    }
+                }
+        }
+}
+
+//Product Booking Forms Steps
+
+#book-the-cruise{
+    float:left;
+    width:100%;
+    margin:20px 0; 
+    
+    header{
+        float:left;
+        width:100%;
+
+		h1 {
+			color:#000;
+            float:left;
+            font-size:28px;
+            margin-top:36px;
+            font-weight:bold;
+		}
+        
+         h3{
+            color:#000;
+            float:left;
+            font-size:23px;
+            margin-top:36px;
+            font-weight:normal;
+         }
+         
+         ul{
+            float:right;
+                li{
+                    float:left;
+                    font-weight:bold;
+                    font-size:12px;
+                    
+                    &.step-number{
+                        width:auto;
+                        text-align:center;
+                        
+                        span{
+                            background:url(../../images/step-ribbon.png)  no-repeat;
+                            display:block;
+                            font-weight:bold;
+                            color:#fff;
+                            height:34px;
+                            padding-top:6px;
+                            text-align:center;
+                            width:84px;
+                        }
+                        
+                        span.active{
+                            background-position:0 0 !important;
+                        }
+                        
+                        span.normal{
+                            background-position:0 -40px;
+                        }
+                        
+                    }
+                    
+                    &.steps-separator{
+                        border-bottom:1px dotted #000;
+                        display:block;
+                        height:48px;
+                        margin:0 2px;
+                        width:35px;
+                    }
+                }
+         }
+    }
+}
+
+//Product Booking Forms Steps
+
+#details-form{
+    background:#dceef9 url(../../images/expert-bg.png)  no-repeat bottom right;
+    float:left;
+    height:160px;
+    margin-top:10px;
+    padding:20px;
+    .roundedDetails (15px, 0, 15px, 15px);
+    width:880px;
+        
+        h4{
+            font-size:17px;
+            font-weight:bold;
+            color:#000;
+            margin:0 0 5px;
+        }
+        
+        #details-form-left{
+            float:left;
+            width:700px;
+            height:166px;
+            border-right:1px dotted #000;
+            
+            /*overflow:hidden;*/
+                #form-container{
+                    width:1400px;   //big enought to wrap both steps and scroll left to right
+                }
+        }
+        #details-form-all{
+            
+            float:left;
+            width:700px;
+            
+                .tte-form-row,
+                label{
+                    
+                    float:left;
+                    width:100%;
+                    
+                     .error-class{
+                        label,
+                        input{
+                            color:#eb212e;   
+                        }
+                        
+                        input{
+                            border:1px solid #eb212e !important;  
+                        }
+                        
+                    }
+                        &.adjusted-row{
+                            margin-top:10px;
+                        }
+                        
+                        .tte-one-half{
+                            float:left;
+                            margin:0 15px 0 0;
+                            width:330px;
+                            
+                                input[type="text"]{
+                                    background:#fff;
+                                    color:#666666;
+                                    border:0;
+                                    font-size:14px;
+                                    padding:5px;
+                                    outline:none;
+                                    .roundedDetails (5px, 5px, 5px, 5px);
+                                    width:313px;
+                                }
+                            
+                            .tte-one-half-phone{
+                                width:200px;
+                                float:left;
+                                
+                                input[type="text"]{
+                                    width:180px;
+                                }
+                            }
+                            
+                            .tte-one-half-code{
+                                width:125px;
+                                float:left;
+                                
+                                input[type="text"]{
+                                    width:115px;
+                                }
+                            }
+                        }
+                }
+                label{
+                    color:#666666;
+                    font-size:12px;
+                    font-weight:bold;
+                }
+        }
+        
+        #tte-from-step2{
+            float:left; 
+            width:680px;
+            display:none;
+                            
+            .input-row{
+                margin-top:10px;   
+            }
+                textarea{
+                    background:#fff;
+                    border:0;
+                    width:660px;
+                    height:55px;
+                    padding:10px;
+                    outline:none;
+                    resize:none;
+                }
+                
+              #back-step1 ,
+              #send-to-expert{       
+                        .roundedDetails (5px, 5px, 5px, 5px);
+                        border:0;
+                        padding:5px 20px;
+                        color:#fff;
+                        text-transform:uppercase;
+                        cursor:pointer;
+                }
+                
+                #back-step1{
+                    border:0;
+                    background:#1fbae0;
+                }
+                
+                #send-to-expert{                 
+                    .commonDarkOrgangeBackground();
+                }
+                
+        }
+        
+        #details-form-help{
+         float:right;
+         width:160px;
+           
+           h5{
+                color:#000;
+                font-size:24px;
+                font-weight:bold;
+                margin-top:10px;
+            }
+           
+           span{
+                color:#000;
+                font-size:18px;
+                margin:13px 0 8px;
+                display: block;
+            }
+           
+           p{
+                font-size:18px;
+                color:#000;  
+                line-height:22px;
+                font-weight:normal;
+            }
+        }
+        
+        #subscribe-email,
+        #details-form-errors{
+            float:left;           
+            width:330px;
+        }
+        
+        #subscribe-email{
+          
+          input,
+          label{
+            float:left;   
+          }
+          
+          label{
+            font-size:12px;
+            width:300px;
+            font-weight:normal;
+            line-height:15px;
+			margin-left: 5px;
+          }
+        }
+        
+        #details-form-errors{
+            #booking-form-error{
+                background:url(../../images/red-tick.png)  no-repeat;
+                color:#eb212e;
+                font-size:14px;
+                padding: 3px 0 0 19px;
+                margin: 5px 0 0 13px;
+                float: left;
+            }
+            
+            input[type="submit"]{
+                    .commonDarkOrgangeBackground();
+                    border:0;
+                    color:#fff;
+                    cursor:pointer;
+                    float:right;
+                    font-weight:bold;
+                    padding:5px 15px;
+                    .roundedDetails (5px, 5px, 5px, 5px);
+                    text-transform:uppercase;
+            }
+        }
+         
+}
+
+//Product Booking Forms Steps Ends

@@ -1,0 +1,25 @@
+﻿@* Renders a list of deals *@
+@using Cruises.Domain.Model.Search
+@model IList<CruiseInfo>
+
+@foreach (CruiseInfo cruise in Model)
+{
+    <li>
+        <figure>
+            <img class="thumbnail" src="@cruise.ShipImageUrl" alt="" width="150" />
+        </figure>
+        <article class="detail">
+            <h3>
+                <a href="@Url.Action(MVC.Search.GetCruise(cruise.SessionId, cruise.Id))">@cruise.Name <span>&raquo;</span></a></h3>
+            <h4>
+                <strong>Cruise Ship:</strong> @cruise.ShipName, @cruise.CruiseLineName</h4>
+            <h4>
+                <strong>From:</strong> @cruise.StartPort</h4>
+            <div class="rs">
+                <h5>@cruise.Nights NIGHTS FROM <sup>*</sup></h5>
+                <span class="doller"><sup>$</sup>@Math.Round(cruise.LeadInPrice)</span>
+            </div>
+        </article>
+    </li>
+}
+

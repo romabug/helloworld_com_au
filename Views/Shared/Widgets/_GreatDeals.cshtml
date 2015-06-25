@@ -1,0 +1,21 @@
+﻿@model Cruises.Domain.ViewAdapter.Seo.GreatDeals
+<section class="greatDeals"> 
+ 
+	@if(!Model.IsBookingEngineActive)
+	{
+	    //Apply the styling to disable the deals
+	    <div class="maintenanceOverlay"></div>
+	}
+
+    <h3>Book a Great Deal</h3>
+    <ul class="cityList">
+        <li><a href="/cruises/regions/oceana">AUSTRALIA</a></li>
+        <li><a href="/cruises/regions/asia-and-indian-ocean">ASIA</a></li>
+        <li><a href="/cruises/regions/europe">EUROPE</a></li>
+        <li><a href="/cruises/regions/northamerica">USA</a></li>
+        <li class="last"><a href="/cruises/regions">WORLDWIDE</a></li>
+    </ul>
+    <ul class="trips">
+         @Html.Action(MVC.Seo.PopularDeals())
+    </ul>
+</section>

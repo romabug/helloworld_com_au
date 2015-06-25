@@ -1,0 +1,51 @@
+﻿@model Cruises.Domain.Model.Person
+
+
+<h4>Your Details</h4>
+<div class="tte-form-row">
+    <div class="tte-one-half">
+        <label>
+            First Name*
+        </label>
+        @Html.TextBoxFor(m => m.FirstName)
+        
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="tte-one-half">
+        <label>
+            Last Name*
+        </label>
+        @Html.TextBoxFor(m => m.LastName)
+
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+</div>
+<div class="tte-form-row adjusted-row">
+    <div class="tte-one-half">
+        <label>
+            Email*
+        </label>
+        @Html.TextBoxFor(m => m.Email)
+
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="tte-one-half">
+        <div class="tte-one-half-phone">
+            <label>
+                Phone
+            </label>
+            @Html.TextBoxFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+        <div class="tte-one-half-code">
+            <label>
+                Post code*
+            </label>
+            @Html.TextBoxFor(m => m.Postcode)
+
+            @Html.ValidationMessageFor(m => m.Postcode)
+        </div>
+    </div>
+</div>  
+
+

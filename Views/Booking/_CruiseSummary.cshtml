@@ -1,0 +1,73 @@
+﻿@model Cruises.Domain.Model.Search.Cruise
+
+<div id="cdm-details">
+    <div class="cdm-left-row">
+        <span class="cdm-col small-col">
+			Cruise Line:
+		</span>
+		<span class="cdm-col wider-col">
+			@Model.CruiseLineName
+		</span>
+    </div>
+
+    <div class="cdm-left-row even-row">
+        <span class="cdm-col small-col">
+			Ship:
+		</span>
+		<span class="cdm-col wider-col">
+			@Model.ShipName
+		</span>
+    </div>
+
+    <div class="cdm-left-row">
+        <span class="cdm-col small-col">
+			Departs:
+		</span>
+		<span class="cdm-col wider-col">
+			From @Model.StartPort - @Model.StartDate.ToString("d MMM yyyy")
+		</span>
+    </div>
+
+    <div class="cdm-left-row">
+        <span class="cdm-col small-col">
+			Returns:
+		</span>
+		<span class="cdm-col wider-col">
+			To @Model.ReturnPort - @Model.ReturnDate.ToString("d MMM yyyy")
+		</span>
+    </div>
+
+    <div class="cdm-left-row even-row">
+        <span class="cdm-col small-col">
+			Nights:
+		</span>
+		<span class="cdm-col wider-col">
+			@Model.Nights
+		</span>
+    </div>
+
+    <div class="cdm-left-row">
+        <span class="cdm-col small-col">
+			Cabin:
+		</span>
+		<span class="cdm-col wider-col">
+			@ViewData["cabinTypeName"]
+		</span>
+    </div>
+
+     <div class="cdm-left-row even-row">
+        <span class="cdm-col small-col">
+			Cruise Type:
+		</span>
+		<span class="cdm-col wider-col">
+			@if (Model.IsFlyCruise)
+            {
+                @: Fly/Cruise
+            }
+            else
+            {
+                @: Cruise Only
+            }
+		</span>
+    </div>
+</div>

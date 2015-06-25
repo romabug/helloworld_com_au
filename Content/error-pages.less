@@ -1,0 +1,70 @@
+/*****************************************************************************
+Error Pages Styles
+*****************************************************************************/ 
+
+.arial()    { font-family: 'Arial', sans-serif; }
+
+.error {
+	float: left;
+	width: 100%;
+	margin: 20px 0;
+
+	h1 {
+		font-weight: bold;
+		font-size: 24px;
+		color: #000000;
+	}
+
+	.message {
+		margin: 0 auto;
+		width: 240px;
+		height: 280px;
+		background: url(../../images/error-marker.png) no-repeat 0 0 transparent;
+
+		.message-content {
+			float: left;
+			position: relative;
+			text-align: center;
+			top: 25px;
+			padding: 0 20px 0 15px;
+
+			img {
+				margin: 0 0 10px 0;
+				text-transform: uppercase;
+			}
+
+			h2 {
+				font-size: 28px;
+				font-weight: bold;
+				text-transform: uppercase;
+				margin: 0 0 5px 0;
+			}
+
+			p {
+				font-size: 16px;
+				margin: 0 0 10px 0;
+
+				&.yellow {
+					color: #feb000;
+					font-weight: bold;
+				}
+
+				&.blue {
+					color: #00bce4;
+					font-size: 14px;
+					font-weight: bold;
+					margin: 0 !important;
+				}
+
+				a {
+					text-decoration: none;
+					cursor: pointer;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}

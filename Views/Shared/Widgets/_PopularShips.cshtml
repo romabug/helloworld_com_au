@@ -1,0 +1,14 @@
+﻿@* Renders a list of Cruise Ships *@
+@using Cruises.Domain.Model
+@model IList<Ship>
+
+<section class="popularShips">
+    <h3>Popular Ships</h3>
+    <p>
+        @foreach (Ship ship in Model)
+        {
+            <a href="@string.Format("/cruises/cruise-lines/{0}/{1}", ship.CruiseLineUrlFriendlyName, ship.UrlFriendlyName)"> @ship.Name </a>
+            <span>|</span>
+        }
+    </p>
+</section>

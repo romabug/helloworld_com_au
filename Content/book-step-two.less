@@ -1,0 +1,333 @@
+ .passenger-titles{
+    color:#000;
+     padding: 12px 0 12px 35px;
+        font-weight: normal;
+        font-size: 22px;
+         background:#dceef9;
+         float:left;
+         width:890px;
+         
+        &.lead-passenger
+        {
+            margin-top:15px;
+        }
+        &.payment-method
+        {
+            margin-top:20px;
+        }
+}
+
+.passenger-count
+{
+    font-family: 'dosisbold',sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    color:#000000;
+    float:left;
+    width:100%;
+    margin:20px 0 20px;
+}
+
+        
+.passenger-details-row{
+    float:left;
+    width:890px;
+    margin:0 0 10px 15px;
+       
+       &.even
+        {
+            margin:0;
+        }
+        
+        &.more-gap
+        {
+            margin-bottom:35px;
+        }
+        
+        #error-message-passengers{
+            float:left;
+            background: url(../../images/red-tick.png) no-repeat;
+            padding: 3px 0 0 19px;
+            margin-left:300px;
+        }
+            
+       // all the columns realted classes
+       
+        .pdr-column
+            {
+                float:left;
+                margin-right:18px;
+                    label
+                    {
+                        float:left;
+                        width:100%;
+                        margin:0 0 2px;
+                        font-size:15px;
+                    }
+                    
+                    p
+                    {
+                        margin:10px 0;
+                    }
+                    
+                    &.title-rel
+                    {
+                        width:75px;   
+                    } 
+                    
+                    &.name-rel
+                    {
+                        width:170px;
+                            input[type="text"] 
+                            {
+                                width:96%;
+                            }
+                    }
+                    
+                    &.dob-rel
+                    {
+                        width:210px;
+                    }
+                    
+                    &.nation-rel
+                    {
+                        width:175px;   
+                    }
+                    
+                    &.address-rel{
+                        width:193px;
+                            &.even{
+                                margin:0 0 0 8px;   
+                            }
+                    }
+                    &.pc-suburb
+                    {
+                        width:185px;   
+                    } 
+                    
+                    &.code-num
+                    {
+                        width:110px;
+                    }
+                    
+                    &.pc-state
+                    {
+                        width:130px;
+                        margin-left:25px;
+                    }
+                    
+                    &.card-rel
+                        {
+                            width: 255px;
+                            margin-right: 60px;
+                            margin-left: 15px;
+                        }
+                        
+                    &.wider-add-rel
+                        {
+                            width:437px;
+                        }
+                        
+                    &.passport-number
+                        {
+                            width: 230px;
+                            margin-right: 25px;
+                        }
+                    
+                    &.passport-valid-dates
+                        {
+                            width:203px;
+                        }
+                    
+                    &.passport-issuer
+                        {
+                            width:160px;
+                        }
+                    &.dining-options{
+                        width:290px;
+                    }
+            }
+            
+
+            .pdr-right
+            {
+                float:left;
+                margin-left:50px;
+                width:425px;
+            }
+            
+            .pdr-left-wrap{
+                float:left; 
+                width:415px;  
+            }
+            .pdr-left
+            {
+                float:left;
+                width:415px;
+                margin:0 0 15px;
+            }
+            
+            &.pad-bottom
+            {
+                padding-bottom: 25px;
+            }
+            
+            select
+            {
+                border:0;
+                outline:none;
+                color: #000;
+            }
+            
+            input[type="text"]
+            {
+                width:100%;
+                border: 1px solid #dedede;
+                color: #000;
+                padding: 7px 5px;
+                margin: 0 18px 0 0;
+                outline: none;
+                background:#fff;
+                border:1px solid #dedede;             
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+  
+            .booking-sel-wrapper
+            {
+                background:#fff url(../../images/cruise-search/sel-drp-down.jpg) no-repeat;
+                cursor:pointer;
+                color: #0078c1;
+                display: block;
+                margin-right:10px;
+                float:left;
+                border: 1px solid #dedede;
+                background-position: 94% 11px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+            
+            .booking-sel-wrapper.title,
+             .booking-sel-wrapper.state
+                {
+                    width:75px;
+                    overflow-x:hidden;    
+                }
+                
+            .booking-sel-wrapper.country
+                {
+                    width:260px;
+                    overflow-x:hidden;    
+                }
+                
+            .booking-sel-wrapper.title select,
+            .booking-sel-wrapper.state select
+                {
+                    width:93px;
+                    background:transparent;    
+                }
+                
+                .booking-sel-wrapper.country select
+                {
+                    width:280px;
+                    background:transparent;    
+                }
+
+            
+            &.pad-bottom
+            {
+                padding-bottom: 25px;
+                    p{
+                        display:block;
+                        margin:10px 0;
+                    }
+            }
+            select
+            {
+                border:0;
+                outline:none;
+                color: #000;
+                height: 30px;
+            }
+            
+         // all the columns realted classes ends
+}
+
+
+//Secondary Passengers
+.secondary-passenger-wrapper{
+    //border-top:1px solid #dedede;
+        //inner classes 
+        .secondary-passenger-wrapper .passenger-details-row
+        {
+            margin-bottom:30px;
+        }
+        .secondary-passenger-wrapper header
+        {
+            background: #fff url("/images/booking-header.jpg") top repeat-x;
+            float: left;
+            width: 992px;
+            height: 2px;
+            background-position: 0 -2px;
+        }
+        
+        .secondary-passenger-wrapper.bottom-last header{
+            margin-left: -45px;
+            padding-bottom:15px;
+            padding-top:20px
+        }
+}
+
+//Secondary Passengers Ends
+
+
+#sumbit-step-2{
+    background:#f58227;
+    width:190px;
+    padding:5px 0;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    float:right;
+    border:0;
+    border-radius:5px;
+}
+
+
+.booking-sel-wrapper.nationality
+{
+    width:192px;
+    margin:0 !important;
+    overflow-x:hidden;
+} 
+
+.booking-sel-wrapper.nationality select
+{
+     width:212px;
+    background:transparent;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+   /* IE10-specific styles go here */  
+.k-dropdown-wrap .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input {
+  height: 25px;
+  border: 1px solid #dedede;
+  border-radius: 3px 3px 3px 3px;
+}
+.k-picker-wrap .k-select {
+    height: 25px;
+    left: 0px;
+    width:26px;
+}
+
+.k-i-calendar {
+  background-image: url('../../images/calendar-icon.png') !important;
+  width: 26px;
+  height: 25px;
+}
+
+} 

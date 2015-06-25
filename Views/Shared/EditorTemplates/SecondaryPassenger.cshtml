@@ -1,0 +1,94 @@
+﻿@using System.Web.Mvc.Html
+@using Cruises.Common
+@using Cruises.Domain.Model.Booking
+@using Cruises.Domain.ViewAdapter
+@using Shared.Common.Extentions
+@model SecondaryPassenger
+
+@{
+    var minimumBirthAge = Model.Type == PassengerType.Child ? Constants.ChildAgeUpperLimit : 100;
+}
+<div class="secondary-passenger-wrapper">
+        <div class="passenger-details-row">
+            <span class="passenger-count">Traveller @ViewData["Count"] - @Model.Type</span>
+            <div class="pdr-column title-rel">
+                <label>Title</label>
+                <div class="booking-sel-wrapper title">
+                    @Html.DropDownList("Title", new SelectList(Options.Titles(), "Value", "Text"))
+                </div>
+            </div>
+            <div class="pdr-column name-rel">
+                <label>First Name*</label>
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+            <div class="pdr-column name-rel">
+                <label>Last Name*</label>
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="pdr-column dob-rel">
+                <label>Date of Birth*</label>
+                @(Html.Kendo().DatePickerFor(model => model.DateOfBirth)
+                      .Deferred()
+                      .Format("yyyy/MM/dd")
+                      .Culture("en-AU")
+                              .Min(DateTime.UtcNow.AddYears(-minimumBirthAge).Date)
+                              .Max(DateTime.UtcNow.Date))
+                @Html.ValidationMessageFor(m => m.DateOfBirth)
+            </div>
+            <div class="pdr-column nation-rel">
+                <label>Nationality</label>
+                <div class="booking-sel-wrapper nationality">
+                    @Html.DropDownList("Nationality", new SelectList(Options.Countries(), "Value", "Text"))
+                </div>
+                @Html.ValidationMessageFor(m => m.Nationality)
+            </div>
+        </div>
+    </div>
+
+    <!-- Passport Details -->
+<div class="passenger-details-row more-gap">
+    @if (Model.IsPassportInfoRequired)
+    {
+        <div class="pdr-column passport-number">
+            <label>Passport number*</label>
+            @Html.TextBoxFor(m => m.PassportNumber)
+            @Html.ValidationMessageFor(m => m.PassportNumber)
+        </div>
+        
+        <div class="pdr-column passport-valid-dates">
+            <label>Passport issue date*</label>
+            @(Html.Kendo().DatePickerFor(model => model.PassportIssueDate)
+                  .Deferred()
+                  .Format("yyyy/MM/dd")
+                  .Culture("en-AU")
+                  .Min(DateTime.UtcNow.AddYears(-minimumBirthAge).Date)
+                  .Max(DateTime.UtcNow.Date))
+            @Html.ValidationMessageFor(m => m.PassportIssueDate)
+        </div>
+        
+        <div class="pdr-column passport-valid-dates">
+            <label>Passport expiry date*</label>
+            @(Html.Kendo().DatePickerFor(model => model.PassportExpiryDate)
+                  .Deferred()
+                  .Format("yyyy/MM/dd")
+                  .Culture("en-AU")
+                  .Min(DateTime.UtcNow.Date)
+                  .Max(DateTime.UtcNow.AddYears(50).Date))
+            @Html.ValidationMessageFor(m => m.PassportExpiryDate)
+        </div>
+        
+        <div class="pdr-column passport-issuer">
+            <label>Passport issuer*</label>
+            <div class="booking-sel-wrapper nationality">
+                @Html.DropDownListFor(m => m.PassportIssuingCountry, new SelectList(Options.Countries(), "Value", "Text"))
+            </div>
+            @Html.ValidationMessageFor(m => m.PassportIssuingCountry)
+        </div>
+    }
+</div>
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.Primary)
+@Html.HiddenFor(m => m.Type)
+@Html.HiddenFor(m => m.IsPassportInfoRequired, new { @id = "IsPassportInfoRequired" })

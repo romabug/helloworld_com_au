@@ -1,0 +1,424 @@
+/*****************************************************************************
+Advanced Search Styles
+*****************************************************************************/ 
+
+.arial()    { font-family: 'Arial', sans-serif; }
+
+.advanced-search	{
+	float: left;
+	margin-bottom: 40px;
+	border-bottom: 1px dotted #666666;
+	padding-bottom: 10px;
+
+	.search {
+		float: left;
+		width: auto;
+		height: 31px;
+		line-height: 31px;
+		font-size: 15px;
+		font-weight: bold;
+		color: white;
+		background: #f58227;
+		border: 0;
+		text-transform: uppercase;
+		text-align: center;
+		padding: 0 20px;
+	}
+
+	#clearSearch	{
+		float: right;
+		margin-top: 13px;
+		color: #1fbae0;
+	}
+
+	#advanced-header	{
+		float: left;
+		width: 920px;
+		margin: 20px 0 0;
+		position: relative;
+
+		h2 {
+			float: left;
+			.arial();
+			font-size: 28px;
+			line-height: 30px;
+			font-weight: bold;
+			margin-top: 15px;
+		}
+	}
+
+	.advanced-search-form	{
+		float: left;
+		width: 920px;
+		margin-bottom: 10px;
+
+		input[type=radio]:checked + label{
+			color: #ffffff;
+			width: 100%;
+			padding: 3px;
+			background-color: #01bae2;
+			border-radius: 2px;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			-o-border-radius: 2px;
+		}
+
+		input[type=radio]:checked{
+			background-color: #01bae2;
+			border-radius: 3px;
+			-webkit-border-radius: 2px;
+			-moz-border-radius: 2px;
+			-o-border-radius: 2px;
+		}
+
+		header	{
+			font-size: 21px;
+			.arial();
+			font-weight: bold;
+			margin-top: 1px;
+			float: left;
+			width: 890px;
+			cursor: pointer;
+			padding-top: 10px;
+			padding-left: 30px;
+			border-bottom: 1px dotted #dedede;
+			height: 25px;
+			background-color: #e3f6fc;
+
+			&.normal	{
+				background: url(../../images/icon11.png) no-repeat 5px 11px #e3f6fc;
+			}
+
+			&.active	{
+				background: url(../../images/icon12.png) no-repeat 5px 11px #e3f6fc;
+			}
+		}
+
+		.rad-info	{
+			padding: 15px 45px 15px 0;
+			float: left;
+			width: 875px;
+			margin-bottom: 3px;
+
+			&.hidden {
+				display: none !important;
+				visibility: hidden;
+			}
+
+			.three-year-dates {
+				width: 920px;
+				float: left;
+
+				.year {
+					margin-right: 20px;
+					width: 285px;
+					float: left;
+
+					strong {
+						font: bold 18px/20px arial;
+						display: block;
+					}
+
+					ul {
+						float: left;
+						width: 275px;
+						margin: 2px 0 0;
+
+						li {
+							width: 40px !important;
+							margin-right: 5px !important;
+							float: left;
+							margin: 0 5% 7px 0;
+							padding: 0 0 0;
+							width: 28%;
+							text-align: center;
+							border-radius: 2px;
+							-webkit-border-radius: 2px;
+							-moz-border-radius: 2px;
+							-o-border-radius: 2px;
+							position: relative;
+							behavior: url("Content/PIE.htc");
+
+							a {
+								position: relative;
+								font: bold 14px/22px arial;
+								float: left;
+								color: #ffffff;
+								width: 100%;
+								background-color: #01bae2;
+								border-radius: 2px;
+								-webkit-border-radius: 2px;
+								-moz-border-radius: 2px;
+								-o-border-radius: 2px;
+								position: relative;
+								behavior: url("Content/PIE.htc");
+								text-decoration: none;
+
+								&.selected_month,
+								&.last_selected_month,
+								&.activeMonth {
+									background: #f58227 !important;
+									color: #ffffff !important;
+									border-radius: 2px;
+									-webkit-border-radius: 2px;
+									-moz-border-radius: 2px;
+									-o-border-radius: 2px;
+									position: relative;
+									behavior: url("Content/PIE.htc");
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.one-row {
+				float: left;
+				width: 875px;
+
+				ul {
+					float: left;
+
+					li {
+						padding: 4px 0;
+						cursor: pointer;
+						float: left;
+						width: 123px !important;
+						margin-right: 20px;
+
+						label {
+							font-size: 15px;
+						}
+					}
+				}
+			}
+
+			.ri-top {
+				float: left;
+
+				.checks1 {
+					label {
+						font-size: 15px;
+					}
+				}
+
+				.one-fourth-list {
+					float: left;
+					width: 218px;
+					margin-bottom: -15px;
+
+					ul {
+						padding: 0;
+						margin-bottom: 15px;
+						margin-top: 10px;
+
+						li {
+							display: block;
+							list-style: none;
+							margin: 5px 0;
+
+							label {
+								font-size: 15px;
+							}
+						}
+					}
+
+					h3 {
+						font-size: 18px;
+						.arial();
+						font-weight: bold;
+						margin: 5px 0;
+					}
+
+				}
+			}
+
+			.wrapper	{
+				float: left;
+				width: 100%;
+				border-left: 0;
+
+				.selection {
+					float: left;
+					margin: 0 0 0 0.5%;
+					width: 99%;
+
+					li {
+						float: left;
+						width: 62px;
+
+						&.last {
+							float: left;
+						}
+
+						.people {
+							display: block;
+							float: left;
+							width: 62px;
+							margin-top: 10px;
+						}
+					}
+
+					.selectAge {
+						float:left;
+						width:100%;
+						padding: 0;
+
+						.passengers-ages {
+							width: 62px;
+							float: left;
+							margin-right: 10px;
+
+							h4 {
+								font-size:12px;
+								line-height:14px;
+								font-weight:bold;
+								color:#000000;
+								margin-bottom: 3px;
+							}
+
+							.age {
+								float:left;
+								width:100%;
+								padding:0 !important;
+								border: 0;
+								background: url(../../images/arrow.png) no-repeat 93% 13px #1fbae0;
+								border-radius: 3px;
+								margin: 0 2% 5px 0 !important;
+								border-radius: 3px;
+								-webkit-border-radius: 3px;
+								-moz-border-radius: 3px;
+								-o-border-radius: 3px;
+        
+								select {
+									width:100%;
+									float:left;
+									height:33px;									
+									border:0;
+
+									-webkit-appearance: none;
+
+									border-radius: 3px;
+									border-radius: 3px;
+									-webkit-border-radius: 3px;
+									-moz-border-radius: 3px;
+									-o-border-radius: 3px;
+
+									color: #FFFFFF;
+
+									
+									background:#FFF;
+									background-color: transparent;
+									
+
+									font: bold 14px/33px arial;
+									white-space: nowrap; 
+									
+									overflow: hidden;
+
+									/*removing the arrow for Firefox*/
+									-moz-appearance: none;
+									text-indent: 5.01px;
+									text-overflow: '';
+									padding-top:6px;
+									
+									/*padding for IE8*/
+									padding-top:0px\9;
+									padding-left:14px\9;
+
+									option {
+										color: #000000 !important;	
+										background:#FFF;
+										background-color: none;
+										padding:0;
+										margin:0;
+										text-indent: 10px;
+										font-weight:normal;									
+
+										/*padding for IE8*/
+										padding-top:0px\9;
+										margin-top:0px\9;	
+										top:auto;
+									}
+								}
+
+								select::-ms-expand {
+									/*removing the arrow for IE*/
+									display: none;
+								}
+
+
+
+        
+								&.last { padding:0; }
+							}
+
+							&.last { margin-right:0; }
+						}
+					}
+
+					.childrenAge {
+						position:absolute;
+						background-color:#1fbae0;
+						padding: 5px;
+						width: auto;
+						left: 640px;
+						top:241px;
+						z-index:990;
+						border-radius: 3px;
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						-o-border-radius: 3px;
+
+						label {
+							float:left;
+							font-weight:bold;
+							font-size:14px;
+							line-height:27px; 
+							font-family: 'Arial', sans-serif;
+							color: #fff;
+						}
+    
+						span {
+							float:left;
+							width:100%;
+    
+							.selecta {
+								float:left;
+								width:auto;
+							}
+        
+							select { width:40%; }
+							input[type="submit"] {
+								float:left;
+								width:auto;
+								height:25px;
+								line-height:25px;
+								font-size:15px;
+								font-weight:bold;
+								color:#fff;
+								background:#f8ac38;
+								border:0;
+								text-transform:uppercase;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.advanced-container .cruiseLines{
+	padding: 0px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+	.advanced-search .advanced-search-form .rad-info .wrapper .selection .selectAge .passengers-ages .age select {  
+		padding-top: 0px;
+		
+	}
+
+
+}
+

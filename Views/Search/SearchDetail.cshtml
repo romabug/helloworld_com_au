@@ -1,0 +1,221 @@
+﻿@using Cruises.Domain.Model
+@using Cruises.Domain.Model.Search
+@model Cruises.Domain.ViewAdapter.Search.SearchDetailPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;    
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            hwc_searchdetail.init();
+        });	
+    </script>
+}
+
+@Html.Partial(MVC.Search.Views._SearchDetailInfo, Model.Detail)
+<section id="tabs-promo">
+    <section id="product-tabs-wrapper">
+        <div id="searchDetailTabs">
+        <ul id="pt-tabbed-section">
+			<li class="active-option"  ref_name="ui-tabs-1"><a href="@Url.Action(MVC.Search.ActionNames.CabinTypeSummary, MVC.Search.Name, new CabinTypeRequest { DepartureAirport = string.Empty, SessionId = @Model.Detail.SessionId, CruiseInfoId = @Model.Detail.Id })">
+                    Cabin Grades</a></li>
+			<li  ref_name="itinerary">Itinerary</li>
+			<li ref_name="facilities">Ship facilities</li>
+			<li class="last-option" ref_name="decks">Decks</li>
+		</ul>
+
+        <div id="all-content-tabs">
+            <section id="ui-tabs-1" class="show-hide-tabs"></section>
+            @* Itinerary Page *@
+            <section id="itinerary" class="show-hide-tabs">
+                    <div id="itinerary-table">
+                        <header class="itinerary-table-row">
+                            <div class="it-day">
+                                Day
+                            </div>
+                            <div class="it-arrival-time">
+                                Arrival Time
+                            </div>
+                            <div class="it-departure-time">
+                                Departure Time
+                            </div>
+                            <div class="it-departure-port">
+                                Port
+                            </div>
+                        </header>
+                        @foreach (var itinerary in Model.Detail.Itineraries)
+                        {
+                            <div class="itinerary-table-row">
+                                <div class="it-day">
+                                    @itinerary.ArriveDate.ToString("dd MMMM yyyy")
+                                </div>
+                                <div class="it-arrival-time">
+                                    @itinerary.ArriveTime
+                                </div>
+                                 <div class="it-departure-time">
+                                    @itinerary.DepartureTime
+                                </div>
+                                <div class="it-departure-port">
+                                    <h4>@itinerary.Name</h4>
+                                    <p>@itinerary.Description</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+            </section>
+            @* Itinerary Page Ends*@
+
+            @* Facilities *@
+            <section id="facilities" class="show-hide-tabs">
+                    <div class="facilities-details">
+                        <div>
+                            <h4>@Model.Detail.FacilitiesInfo.ShipName</h4>
+                            <p>@Model.Detail.FacilitiesInfo.Description</p>
+                        </div>
+                    </div>
+                    <div class="facilities-details right-col">
+                        <div>
+                            @foreach (var group in Model.Detail.FacilitiesInfo.Facilities.GroupBy(f => f.Category))
+                            {
+                                <h4>@group.Key</h4>
+                                <ul>
+                                    @foreach (var facility in group)
+                                    {
+                                        <li>@facility.Name</li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+            </section>
+
+             @* Facilities Ends *@
+
+              @* Facilities Ends *@
+            <section id="decks" class="show-hide-tabs">
+                <div id="desk-deals">
+                    <div id="dd-left">
+                        <div>
+                            <h4>Decks</h4>
+                            <ul id="deck-numbers">
+                                @{
+                                    int deckCounter = 1;
+                                    string deckText = string.Empty;
+                                    int deckTotal = this.Model.Detail.Decks.Count();
+                                    foreach (ShipDeck deck in this.Model.Detail.Decks)
+                                    {
+                                        if (string.IsNullOrEmpty(deck.ImageUrl))
+                                        {
+                                            continue;
+                                        }
+
+                                        if (deckCounter < 10)
+                                        {
+                                            deckText = "0" + deckCounter.ToString();
+                                        }
+                                        else
+                                        {
+                                            deckText = deckCounter.ToString();
+                                        }
+
+                                        @: <li ref-title="deck-num-@deckCounter">@deckText</li>
+                                        deckCounter++;
+                                    }
+
+                                }	
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="deck-images">
+                        <div>
+                            @{ 
+                                deckCounter = 1;
+                                deckText = "";
+                                 foreach (ShipDeck deck in this.Model.Detail.Decks)
+                                {
+                                    if (string.IsNullOrEmpty(deck.ImageUrl))
+                                    {
+                                        continue;
+                                    }
+
+                                    if (deckCounter < 10)
+                                    {
+                                        deckText = "0" + deckCounter.ToString();
+                                    }
+                                    else
+                                    {
+                                        deckText = deckCounter.ToString();
+                                    }
+                                    <div id="deck-num-@deckCounter" class="fd-section">
+                                        <h4 class="adjusted-padding">DECK @deckText</h4>
+                                        <figure>
+                                            <img src="@deck.ImageUrl" />
+                                        </figure>
+                                    </div>
+                                    deckCounter++;            
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+              @* Facilities Ends *@
+        </div>
+        </div>    
+    </section>
+    <aside id="product-promo">
+	<section id="pp-image">
+		<figure>
+			<img src="/Images/promo.jpg" alt="product promo">
+		</figure>
+	</section>
+	<section id="pp-promo-details">
+		<h3>@Model.Detail.CruiseLineName</h3>
+		<p>
+			@Model.Detail.CruiseLineDescription
+		</p>
+	</section>
+</aside>
+</section>
+
+
+<!-- Talk to expert -->
+<section id="talk-to-expert">
+	<header>
+		<h3>
+			Talk to an expert
+		</h3>
+		<ul id="booking-steps">
+			<li class="step-number">
+				<span class="step active" id="te-step1">1</span>
+				<label>Your Details</label>
+			</li>
+			<li class="steps-separator"></li>
+			<li class="step-number">
+				<span class="step normal"  id="te-step2">2</span>
+				<label>Other Details</label>
+			</li>
+			<li class="steps-separator"></li>
+			<li class="step-number">
+				<span class="step normal"><img src="/Images/cruise-search/form-tick.jpg" alt="tick" /></span>
+				<label>Done</label>
+			</li>
+		</ul>
+	</header>
+    <section id="tte-form">
+        @using (Html.BeginForm(MVC.Search.ActionNames.SubmitEnquiry, MVC.Search.Name, null, FormMethod.Post, new { id = "searchDetailEnquiryForm" }))
+        {
+            @Html.EditorFor(m => m.Enquiry)
+        }
+
+        <div id="tte-form-help">
+            <h5>Need Help?</h5>
+            <span>Call 1300 855 024</span>
+            <p>
+                Our experienced sales team are on call to assist you
+            </p>
+        </div>			
+    </section>	
+</section>	
+<!-- Talk to expert ends -->

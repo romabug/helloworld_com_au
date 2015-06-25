@@ -1,0 +1,41 @@
+﻿@model IList<Cruises.Domain.Model.Booking.Passenger>
+
+@{
+    var primaryPassenger = Model.First();
+}
+<section class="payment-details">
+    <header>
+        Travellers
+    </header>
+    <div class="payment-details-row top">
+        <span class="name">Name</span>
+        <span class="dob">Date of Birth</span>
+        <span class="nationality">Nationality</span>
+        
+        @if (primaryPassenger.IsPassportInfoRequired)
+        {
+            <span class="passport-num">Passport No.</span>
+		    <span class="start-date">Start Date</span>
+		    <span class="end-date">Expiry Date</span>
+		    <span class="issuer">Issuer</span>
+        }
+    </div>
+    
+    @foreach (var passenger in Model)
+    {
+        <!-- row and loop -->
+        <div class="payment-details-row">
+            <span class="name">@passenger.Title @passenger.FullName</span>
+            <span class="dob">@(passenger.DateOfBirth.HasValue ? passenger.DateOfBirth.Value.ToString("d MMM yyyy") : string.Empty)</span>
+            <span class="nationality">@passenger.Nationality</span>
+            
+            @if (primaryPassenger.IsPassportInfoRequired)
+            {
+                <span class="passport-num">@passenger.PassportNumber</span>
+                <span class="start-date">@(passenger.PassportIssueDate.HasValue ? passenger.PassportIssueDate.Value.ToString("d MMM yyyy") : string.Empty)</span>
+                <span class="end-date">@(passenger.PassportExpiryDate.HasValue ? passenger.PassportExpiryDate.Value.ToString("d MMM yyyy") : string.Empty)</span>
+                <span class="issuer">@passenger.PassportIssuingCountry</span>
+            }
+        </div>
+    }
+</section>

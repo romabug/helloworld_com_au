@@ -1,0 +1,48 @@
+@model Cruises.Domain.ViewAdapter.BasePage
+@{
+    Layout = MVC.Shared.Views.Masters._Layout;
+}
+@section HeaderScripts
+{
+@RenderSection("HeaderScripts", false)
+}
+@section featured
+{
+@RenderSection("featured", required: false)
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            hwc_commonsearch.init();
+            hwc_quicksearch.init();
+            hwc_timezonecookie.init();
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+}
+<div class="leftContainer">
+    @Html.Action(MVC.Search.QuickSearch())
+    <section class="seo-content">
+        <p>@RenderSection("LeadText", required: false)</p>
+    </section>
+    @Html.Partial(MVC.Shared.Views.Widgets._Newsletter)
+    @Html.Partial(MVC.Shared.Views.Widgets._ConnectAndShare)
+    @Html.Partial(MVC.Shared.Views.Widgets._UPS)
+    @*Polular Cruise Lines*@
+    @Html.Action(MVC.Seo.PopularCruiseLines())
+    @*Polular Ships*@  
+    @Html.Action(MVC.Seo.PopularShips())
+    @*Polular Regions*@  
+    @Html.Action(MVC.Seo.PopularRegions())
+</div>
+<div class="rightContainer">
+    @RenderSection("Title", required: false)
+    @RenderSection("Banner", required: false)
+    @RenderBody()
+</div>
+<div class="bottomContainer">
+    @Html.Partial(MVC.Shared.Views._Terms) 
+</div>
+

@@ -1,0 +1,21 @@
+﻿@using Shared.Common.Web.Extentions
+@model Cruises.Domain.ViewAdapter.ErrorPage
+
+<section class="error">
+
+    <h1>Internal Server Error - Error 500</h1>
+    <article class="message">
+        <section class="message-content">
+            <img src="/Images/error.png" alt="Error">
+            <h2>Apologies</h2>
+            <p>Something went wrong.</p>
+            <p class="yellow">Whilst we fix it perhaps you could try:</p>
+            <p class="blue"><a>Home Page &raquo;</a></p>
+            <p class="blue"><a>Site Map &raquo;</a></p>
+        </section>
+        @if (Model.Exception != null && Model.DisplayError)
+        {
+            @Html.RenderException(Model.Exception, 0)
+        }
+    </article>
+</section>

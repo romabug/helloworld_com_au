@@ -1,0 +1,81 @@
+@model Cruises.Domain.ViewAdapter.BasePage
+<!DOCTYPE html>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    @if (Model.Metadata != null)
+    {
+        <title>@Model.Metadata.Title</title>
+        if (!string.IsNullOrEmpty(Model.Metadata.Title))
+        {
+        <meta name="title" content="@Model.Metadata.Title" />
+        }
+        if (!string.IsNullOrEmpty(Model.Metadata.Description))
+        {
+        <meta name="description" content="@Model.Metadata.Description" />
+        }
+        if (!string.IsNullOrEmpty(Model.Metadata.Keywords))
+        {
+        <meta name="keywords" content="@Model.Metadata.Keywords" />
+        }
+    }
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/less")
+    @{ Html.RenderPartial(MVC.Shared.Views.Includes._Css); }
+    @RenderSection("HeaderScripts", false)
+    @{ Html.RenderPartial(MVC.Shared.Views.Includes._Webtrends); }
+    @{ Html.RenderPartial(MVC.Shared.Views.Includes._GoogleAnalytics); }
+    @{ Html.RenderPartial(MVC.Shared.Views.Includes._GoogleTagManager); }
+</head>
+    <body>
+        
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <article class="wrapper">
+            <section class="outerWrapper">
+                <header class="header">
+                    @Html.Partial(MVC.Shared.Views._Header)
+                </header>
+                @RenderSection("featured", required: false)
+                <section class="container">
+                @if (!Model.IsBookingEngineActive)
+                    {
+                        <section class="emergency">
+                        <h3>Please Note: <img src="/Images/note.png" alt="Note"></h3> 
+                        <p>Due to high demand this website is currently experiencing slower than usual operation.<br>If you have difficulty booking please <span class="yellow">call our call centre on 1300 855 024</span> for assistance or come back to the site at a later time.</p>
+                        </section>
+                    }
+                    @{ Html.RenderAction(MVC.Settings.Actions.GetPanelMessage()); }
+
+                    @RenderBody()
+
+                </section>
+                <footer class="footer">
+                    @Html.Partial(MVC.Shared.Views._Footer)
+                </footer>
+            </section>
+        </article>
+    
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+            (function (d, t) {
+                var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                g.src = '//www.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g, s);
+            } (document, 'script'));
+        </script>
+        @{ Html.RenderPartial(MVC.Shared.Views.Includes._Js); }
+        @RenderSection("Scripts", required: false)
+        @Html.Kendo().DeferredScripts()
+    </body>
+</html>

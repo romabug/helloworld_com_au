@@ -1,0 +1,112 @@
+﻿@using Cruises.Domain.ViewAdapter
+@model Cruises.Domain.Model.Booking.CreditCard
+
+@*Step 4 - Payment Method*@
+@*step-title*@
+<section class="payment-card-details">
+	<header>
+		<div class="left">
+			<h2>Payment method</h2>
+		</div>
+		<div class="right">
+			<img src="/Images/card_icons.png" alt="" />
+		</div>
+	</header>
+    <hr/>
+    <section id="credit-card-info">
+        <div class="first_row">
+            <div class="first_field">
+                <label>Card type*</label>
+                <div class="selectList">
+                    @Html.DropDownListFor(c => c.CardType, new SelectList(Options.CreditCardTypes(), "Value", "Text"), string.Empty)
+                </div>
+                @Html.ValidationMessageFor(c => c.CardType)
+                <div id="card-type-error" style="display: none"></div>
+            </div>
+            <div class="second_field">
+                <label>Name on card*</label>
+                <div class="inputField">
+                    @Html.TextBoxFor(c => c.NameOnCard, new { @Id = "NameOncard" })
+                </div>
+                @Html.ValidationMessageFor(c => c.NameOnCard)
+            </div>
+            <div class="third_field">
+                <label>Address*</label> 
+                <div class="inputField">
+                    @Html.TextBoxFor(c => c.BillingAddress1, new { @Id = "Address1" })
+                </div>
+                @Html.ValidationMessageFor(c => c.BillingAddress1)
+            </div>
+            <div class="fourth_field">
+                <div class="inputField">
+                    <label></label>
+                    @Html.TextBoxFor(c => c.BillingAddress2, new { @Id = "Address2" })
+                </div>
+            </div>        
+        </div>
+        <div class="second_row">
+            <div class="first_field">
+                <label>Security code*</label>
+                <div class="inputField">
+                    @Html.TextBoxFor(c => c.CardSecurityCode, new { @Id = "SecurityCode" })
+                </div>
+                @Html.ValidationMessageFor(c => c.CardSecurityCode)
+                <div id="card-cvv-error" style="display: none"></div>
+            </div>
+            <div class="second_field">
+                <label>Card number*</label> 
+                <div class="inputField">
+                    @Html.TextBoxFor(c => c.CardNumber, new { @Id = "CardNumber" })
+                </div>
+                @Html.ValidationMessageFor(c => c.CardNumber)
+                <div id="card-length-error" style="display: none"></div>
+            </div>
+            <div class="third_field">
+                <label>Suburb*</label>
+                <div class="inputField">
+                    @Html.TextBoxFor(c => c.BillingCity, new { @Id = "Suburb" })
+                </div>
+                @Html.ValidationMessageFor(c => c.BillingCity)
+            </div>
+            <div class="fourth_field">
+                <label>State*</label>
+                <div class="selectList_state">
+                    @Html.TextBoxFor(m => m.BillingState, new { @Id = "State" })
+                </div>
+                @Html.ValidationMessageFor(c => c.BillingState)
+            </div>
+        </div>
+        <div class="third_row">
+            <div class="first_field">
+                <div class="whatsthis">
+                    <a href="#">What is this?</a> <img src="/Images/what.png" alt="" />
+				</div>
+            </div>
+            <div class="second_field">
+                <label>Expiry date*</label>
+                <div class="selectList_month">
+                    @Html.DropDownListFor(c => c.ExpiryMonth, new SelectList(Options.ExpiryMonths(), "Value", "Text"), "MM*")
+                </div>
+                @Html.ValidationMessageFor(c => c.ExpiryMonth)
+                <div class="selectList_year">
+                    @Html.DropDownListFor(c => c.ExpiryYear, new SelectList(Options.ExpiryYears(), "Value", "Text"), "YY*")
+                </div>
+                @Html.ValidationMessageFor(c => c.ExpiryYear)
+            </div>
+            <div class="third_field">
+                <label>Country*</label>
+                <div class="selectList_country">
+                    @Html.DropDownListFor(c => c.BillingCountry, new SelectList(Options.Countries(), "Value", "Text"), string.Empty)
+                </div> 
+                @Html.ValidationMessageFor(c => c.BillingCountry)
+            </div>
+            <div class="fourth_field">
+                <label>Postcode*</label> 
+                <div class="inputField">
+                  @Html.TextBoxFor(c => c.BillingPostCode, new { @Id = "PostCode" })
+                  @Html.ValidationMessageFor(c => c.BillingPostCode)
+            </div>
+            </div>  
+        </div>      
+    </section>
+</section>

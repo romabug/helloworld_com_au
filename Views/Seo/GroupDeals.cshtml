@@ -1,0 +1,63 @@
+﻿@using Cruises.Domain.ViewAdapter.Seo
+@model SeoPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._SeoLayout;
+}
+@section Title
+{
+    <h2>@Model.Title</h2>
+}
+@section LeadText
+{
+    @if (!string.IsNullOrEmpty(Model.LeadText))
+    {
+        <div>
+            @Html.Raw(Model.LeadText)
+        </div>
+    }
+}
+@section Banner
+{
+    @if (!string.IsNullOrEmpty(Model.BannerUrl))
+    {
+        <img src="@Model.BannerUrl"/>
+    }
+}
+<section class="cruiseLines">
+    <p>
+        @if (Model.Links != null)
+        {
+            foreach (var link in Model.Links)
+            {
+                <a href="@link.Url">@link.Title</a><text> | </text>
+            }
+        }
+    </p>
+</section>
+@if (Model.GroupDeals != null)
+{
+    foreach (GroupDeal groupDeals in Model.GroupDeals)
+    {
+        <section class="greatSeoDeals">
+            <h3>
+                @if (groupDeals.Url != null)
+                {
+                    <a href="@groupDeals.Url">@groupDeals.Title</a>
+                }
+                else
+                {
+                    @groupDeals.Title
+                }
+            </h3>
+            <ul class="trips">
+                @Html.Partial(MVC.Seo.Views._Deals, groupDeals.Deals)
+            </ul>
+        </section>
+    }
+    
+    if(!Model.IsBookingEngineActive)
+    {
+        // Apply the styling to disable the deals
+        <div class="maintenanceOverlay overlay-cruises-seo"></div>
+    }
+}

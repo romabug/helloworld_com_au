@@ -1,0 +1,76 @@
+﻿
+@* Cruise Search Results Template *@
+<script id="template" type="text/x-kendo-template">
+        <li>
+	          <div class="specific-result">
+			    <div class="sr-image">
+				    <figure>
+					    <img src="#= ShipImageUrl #"  width="200" height="127"/>
+				    </figure>
+			    </div>
+			    <div class="sr-details">
+				    <h2><a href="/cruise-info/#= SessionId #/#= Id #">#= Name #</a><span class="small-font">&raquo;</span></h2>
+				    <div class="srd-more">
+					    <div class="srd-more-top">
+						    <div class="srd-more-left">
+                                <span><strong>Cruise Ship:</strong> <a href="\#" onclick="javascript:searchByShip('#= ShipId #'); return false;" >#= ShipName #</a></span>
+                                <span><strong>From:</strong> #= StartPort #</span>
+                                <input type="hidden" value="#= SailDate #" />
+                                 <span><strong>Departs:</strong> #= kendo.toString(new Date(SailDate), 'MMM dd, yyyy') #</span>
+						    </div>
+						    <div class="srd-more-right">
+							    <span class="num-nights">#= Nights # Nights from*</span>
+				                <span class="nights-price"><font class="small">$</font>#= kendo.toString(LeadInPrice, "0") #<font class="small">pp</font></span>
+						    </div>
+					    </div>
+					    <div class="srd-more-bottom right-align">
+                            <div class="label-deals">
+						        <label>
+							        
+						        </label>
+						        <a href="/cruise-info/#= SessionId #/#= Id #">DETAILS</a>
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+        </li>
+</script>
+@* Cruise Search Results Template Ends *@
+<script id="shipsCountTempate" type="text/x-kendo-template">
+     <ul>
+     # for(var i = 0; i < data.length; i++) { #
+     <li class="cruise-line">
+        <span class="normal-sc-chkbox active"></span><input type="checkbox" id="#= data[i].Cruiseline #" name="cruiselineCheckbox" checked="checked"/><label>#= data[i].Cruiseline #</label>
+     </li>
+     # for(var j = 0; j < data[i].Ships.length; j++) { #
+        <li class="cruise-ship">
+            <span class="normal-sc-chkbox active"></span><input type="checkbox" id="#= data[i].Ships[j].ShipName #" value="#= data[i].Ships[j].ShipName #" name="#=data[i].Cruiseline#shipNameCheckbox" checked="checked"/><label>#= data[i].Ships[j].ShipName # <span>(#= data[i].Ships[j].Count #)</span></label>
+        </li>
+         # } #
+        # } #
+    </ul>
+
+</script>
+<script id="durationCountTempate" type="text/x-kendo-template">
+     <ul>
+     # for(var i = 0; i < data.length; i++) { #
+        <li>
+            <span class="normal-sc-chkbox active"></span><input type="checkbox" id="#= data[i].Min #-#= data[i].Max #" value="#= data[i].Min#,#= data[i].Max#" name="durationCheckbox" checked="checked"/><label>#= data[i].Min #-#= data[i].Max # nights <span>(#= data[i].Count #)</span></label>
+        </li>
+        # } #
+    </ul>
+
+</script>
+
+<script id="budgetCountTempate" type="text/x-kendo-template">
+     <ul>
+     # for(var i = 0; i < data.length; i++) { #
+        <li>
+            <span class="normal-sc-chkbox active"></span><input type="checkbox" id="#= data[i].Min #-#= data[i].Max #" value="#= data[i].Min#,#= data[i].Max#" name="budgetCheckbox" checked="checked"/><label>$#= data[i].Min #- $#= data[i].Max # <span>(#= data[i].Count #)</span></label>
+        </li>
+        # } #
+    </ul>
+</script>
+
+

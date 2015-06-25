@@ -1,0 +1,60 @@
+﻿@using Cruises.Common
+@using Cruises.Website.Extensions
+@model Cruises.Domain.Model.Search.Cruise
+
+<h1>@Model.Title</h1>
+<div class="spd-ml-image">
+	<figure>
+        <a href="@Model.ShipImages.DefaultIfEmpty("#").First()" rel="lightbox[ship]" title="@Model.ShipName">
+            <img src="@Model.ShipImages.FirstOrDefault()" alt="@Model.ShipName" title="@Model.ShipName"/>
+        </a>
+	</figure>
+    <div style="display: none;">
+        @foreach (var image in Model.ShipImages.Skip(1))
+        {
+            <a href="@image" rel="lightbox[ship]">
+                <img src="@image" alt="@image" title="@Model.ShipName"/>
+            </a>
+        }
+    </div>
+</div>
+
+<div class="spd-ml-details">
+    <div class="dd-row">
+        <label>Cruise Line:</label>
+        <span class="dd-row-right">
+            @Model.CruiseLineName
+        </span>
+    </div>
+    <div class="dd-row">
+        <label>Cruise Ship:</label>
+        <span class="dd-row-right">
+            @Model.ShipName
+        </span>
+    </div>
+    <div class="dd-row">
+        <label>Departure Port:</label>
+        <span class="dd-row-right">
+            @Model.StartPort
+        </span>
+    </div>
+    <div class="dd-row">
+        <label>Region:</label>
+        <span class="dd-row-right">
+            @string.Join(", ", Model.Regions.Select(r => r.Name))
+        </span>
+    </div>
+    <div class="dd-row">
+        <label>Type:</label>
+        <span class="dd-row-right">
+            @Html.FlyCruise(Model.IsFlyCruise)
+        </span>
+    </div>
+    <div class="dd-row">
+        <label>Departure Date:</label>
+        <span class="dd-row-right">
+            @Model.SailDate.ToString(Constants.Search.OtherCruiseDatesValueFormat)
+        </span>
+    </div>
+</div>
+

@@ -1,0 +1,131 @@
+﻿@using Cruises.Common
+@using Cruises.Website.Extensions
+@model Cruises.Domain.Model.Search.CruiseDetail
+
+	<!-- Top Product Details -->
+	<section id="specific-product-details">
+		<section id="breadcrumb">
+            <a href="#">Bread</a> <span class="crumb-arrow">&raquo;</span> Crumb
+        </section>
+        <header>
+			<h1>@Model.Title, @Model.CruiseLineName</h1>
+		</header>
+		<section id="spd-main">
+			<div id="spd-main-left">
+				<div class="spd-ml-image">
+					<figure>
+                        <a href="@Model.ShipImages.DefaultIfEmpty("#").First()" rel="lightbox[ship]" title="@Model.ShipName">
+                            <img src="@Model.ShipImages.FirstOrDefault()" alt="@Model.ShipName" title="@Model.ShipName"/>
+                        </a>
+					</figure>
+				</div>
+				<div class="spd-ml-details">
+					<div class="dd-row">
+                            <label>Cruise Line:</label>
+                            <span class="dd-row-right">
+                                <a href="@Url.RouteUrl("cruise-search-on", new { cruiseline = Model.CruiseLineUrlFriendlyName })">@Model.CruiseLineName</a>
+                            </span>
+                        </div>
+                        <div class="dd-row">
+                            <label>Cruise ship:</label>
+                            <span class="dd-row-right">
+                                <a href="@Url.RouteUrl("cruise-search-on", new { cruiseline = Model.CruiseLineUrlFriendlyName, cruiseship = Model.ShipUrlFriendlyName })">@Model.ShipName</a>
+                            </span>
+                        </div>
+                        <div class="dd-row">
+                            <label>Departure port:</label>
+                            <span class="dd-row-right">@Model.StartPort</span>
+                        </div>
+                        <div class="dd-row">
+                            <label>Region:</label>
+                            <span class="dd-row-right">
+                                @foreach (var region in Model.Regions)
+                                {
+                                    <a href="@Url.RouteUrl("cruise-search-in", new { region = region.UrlFriendlyName })">@region.Name</a>
+                               
+                                    if (!region.Equals(Model.Regions.Last()))
+                                    {
+                                        @:,
+                                    }
+                                }
+                            </span>
+                        </div>
+                        <div class="dd-row">
+                            <label>Type:</label>
+                                 <span class="dd-row-right">
+                                    @Html.FlyCruise(Model.IsFlyCruise)
+                                </span>
+                        </div>
+                        <div class="dd-row">
+                            <label>Departure date:</label>
+                            <span class="dd-row-right">@Model.SailDate.ToString(Constants.Search.OtherCruiseDatesValueFormat)</span>
+                        </div>
+				</div>
+			</div>
+			<div id="spd-main-right">
+				<div class="spd-mr-row nights-from">
+					@Model.Duration Nights From*
+				</div>
+				<div class="spd-mr-row price">
+					<span class="small">$</span>@Math.Round(Model.LeadInPrice)<span class="small">pp</span>
+				</div>
+                <div class="spd-mr-row passengers">Inc. taxes & port changes</div>
+				<div class="spd-mr-row summary">
+					Summary
+				</div>
+				<div class="spd-mr-row passengers">
+					Adult x <span id="booking-adult-num">@Model.NumberOfAdults</span>, Child x <span  id="booking-children-num"> @Model.NumberOfChildren</span>
+				</div>
+				<div class="spd-mr-row change-passengers" id="passengers-lightbox">
+					<a href="#">Change Passenger &raquo;</a>                      
+				</div>
+				<div class="spd-mr-row book-now">
+					<a href="#">Book Now</a>
+				</div>
+               
+                <div id="change-form-wrapper">
+                    <div id="changed-passenger-details">
+                        <span id="lightbox-close">X</span>
+                        <strong>Passengers</strong>
+                         <ul class="selectAge">
+                            <li>
+                                <label>
+                                    ADULTS AGES 12+
+                               </label>
+                                    <div class="age">
+                                        <select id="adultNum">
+                                            <option value="0">00</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                        </select>
+                                    </div>
+                            </li>
+                            <li class="last">
+                                <label>
+                                    CHILDREN AGES 0-11</label>
+                                    <div class="age">
+                                        <select id="childrenNum">
+                                            <option value="0">00</option>
+                                            <option value="1">01</option>
+                                            <option value="1">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                        </select>
+                                    </div>
+                            </li>
+                        </ul> 
+                         <div id="change-passengers-number">
+                            Update
+                         </div>
+                    </div>                      
+                    <div id="lightbox-wrapper"></div>
+                </div>
+                
+			</div>
+		</section>
+	</section>
+	<!-- TOP Product Details Ends-->

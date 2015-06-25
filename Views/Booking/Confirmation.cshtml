@@ -1,0 +1,141 @@
+@using Cruises.Domain.ViewAdapter.Booking
+@model BookingConfirmationPage
+@{
+    this.Layout = MVC.Shared.Views.Masters._CbeLayout;    
+}
+
+<section id="book-the-cruise">
+	<header>
+        <h1>
+            @if (Model.IsPartialBooking)
+            {
+                @: Booking partially complete
+            }
+            else
+            {
+                @: Confirmation
+            }
+        </h1>
+		<ul id="booking-steps">
+            <li class="step-number">
+                <span class="step normal" id="te-step1">1</span>
+                <label>Your Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal" id="te-step2">2</span>
+                <label>Traveller Details</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step normal">3</span>
+                <label>Payment</label>
+            </li>
+            <li class="steps-separator"></li>
+            <li class="step-number">
+                <span class="step active">4</span>
+                <label>Confirmation</label>
+            </li>
+        </ul>
+	</header>
+</section>
+
+@* Step 4 *@
+<section id="sent">
+    <figure>
+        @if (Model.IsPartialBooking)
+        {
+            <img src="/Images/sent-partial.png" alt="PARTIAL-SENT">
+        }
+        else
+        {
+            <img src="/Images/sent-confirm.png" alt="SENT">
+        }
+    </figure>
+    <div class="content">
+        <div class="confirm">
+            @if (Model.IsPartialBooking)
+            {
+                <h3>
+                    Please note <strong>@Model.PrimaryPassenger.FirstName</strong>!
+                </h3>
+                <p>Your booking is partially complete.</p>
+                <p>An agent will in contact with you shortly to finalise your booking</p>
+                <p style="color:green;">If no one contact you within 24 hours please call 1300 795 633</p>
+            }
+            else
+            {
+                <h3>
+                    Thank you for your booking <strong>@Model.PrimaryPassenger.FirstName</strong>,
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor dictum condimentum. Nulla consectetur imperdiet est quis mattis. 
+                    Aenean molestie eros vitae tellus tincidunt malesuada. Suspendisse quis justo sapien, nec scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+            }
+        </div>
+        <div class="print-email">
+            <ul>
+                <li class="print">
+                    <a href="javascript:window.print()">Print this page &#187;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="cruiseInfo">
+    <div id="payment-summary-header">
+        <header>
+            <span class="summary">Summary</span>
+            <span class="summary-details">@Model.Current.Cruise.Nights Nights - @Model.Current.Cruise.Name</span>
+        </header>
+        <section id="cruise-details-main">
+            <header>
+                Cruise Details
+            </header>
+            <div id="cdm-left">
+                @{ Html.RenderPartial(MVC.Booking.Views._CruiseSummary, Model.Current.Cruise, new ViewDataDictionary { { "cabinTypeName", Model.Current.CabinGrade.CabinType.Name } }); }                
+            </div>
+            <aside id="cruiseSidebar">
+                <section id="bookwidget" class="spd-mr-row nights-from">
+                    <div class="spd-mr-row">
+                        <div class="congrats">Congratulations!</div>
+                        <div class="iti-label">Your itinerary reference:</div>
+                        <div class="iti-number">@this.Model.ReservationNumber</div>
+                        @if (Model.IsPartialBooking)
+                        {
+                            <p style="color:green;">Booking partially complete</p>
+                        }
+                        else
+                        {
+                            <div class="iti-label">Paid on card:</div>
+                            <div class="card-number">xxxx xxxx xxxx @this.Model.CardNumberDisplay</div>
+                        }
+                    </div>
+                    <div class="spd-mr-row summary">
+                        Summary
+                    </div>
+                    @{ this.Html.RenderPartial(MVC.Booking.Views._PaymentSummary, this.Model.PaymentSummary, new ViewDataDictionary { { "canRemoveExtras", false } }); }
+
+                </section>
+            </aside>
+        </section>
+    </div>
+</section>
+
+@*Contact Info*@
+@Html.Partial(MVC.Booking.Views._ContactSummary, Model.PrimaryPassenger)
+
+@*Passenger Info*@
+@Html.Partial(MVC.Booking.Views._PassengerSummary, Model.Passengers)
+
+@*Dining options*@
+@Html.Partial(MVC.Booking.Views._DiningOptionsSummary, Model.DiningOptions)
+
+@*Booking payment travellers summary*@
+<div id="ps-wrapper">
+    <div id="payment-summaries">
+        @{ Html.RenderPartial(MVC.Booking.Views._FinalPaymentSummary, Model.PaymentSummary); }
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model Cruises.Domain.ViewAdapter.Search.QuickSearchViewModel
+
+<section class="find">
+    @using (this.Html.BeginForm(MVC.Search.ActionNames.SearchResults, MVC.Search.Name, FormMethod.Post, new { id = "search-form" }))
+    {
+        @Html.ValidationSummary()
+        @Html.HiddenFor(model => model.SearchForm.SelectedChildAges)
+        <h3>Find a cruise</h3>
+ @Html.ActionLink("Advanced Search >>", MVC.Search.AdvancedSearch())
+        <ul class="selectList">
+            <li class="add">
+                @Html.DropDownListFor(model => model.SearchForm.SelectedFromDate, new SelectList(Model.LeaveFromDates, "Value", "Text"), "LEAVE FROM")
+                @* For troubleshooting timezone issues: *@
+                @Html.HiddenFor(model => model.SearchForm.SelectedFromDate)
+  
+            </li>
+            <li class="add add1">
+                @Html.DropDownListFor(model => model.SearchForm.SelectedToDate, new SelectList(Model.LeaveToDates, "Value", "Text"), "LEAVE TO")
+            </li>
+            <li>
+                @Html.DropDownListFor(model => model.SearchForm.SelectedRegion, new SelectList(Model.Regions, "Id", "Name"), "REGION")
+            </li>
+            <li>
+                @Html.DropDownListFor(model => model.SearchForm.SelectedCruiseLine, new SelectList(Model.CruiseLines, "Id", "Name"), "CRUISE LINE")
+            </li>
+        </ul>
+        <ul class="selectAge">
+            <li>
+                <label>
+                    ADULTS AGES 12+</label>
+                @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfAdults, new SelectList(Model.NumberOfAdults, "Value", "Text"))
+            </li>
+            <li class="last">
+                <label>
+                    CHILDREN AGES 0-11</label>
+                @Html.DropDownListFor(model => model.SearchForm.SelectedNumberOfChildren, new SelectList(Model.NumberOfChildrens, "Value", "Text"))
+            </li>
+        </ul>
+        <div class="childrenAge">
+            <label>
+                CHILDREN AGES</label>
+            <span><span class="selecta">
+            </span></span>
+        </div>
+
+        <input type="submit" value="SEARCH" class="search" />
+    }
+</section>
+
+@if (!Model.IsBookingEngineActive)
+{
+   <section class="message">
+        <section class="message-content">
+            <img src="/Images/error.png" alt="Error">
+            <h2>Apologies</h2>
+            <p>Our online booking engine is undergoing scheduled maintenance.</p>
+            <p class="yellow">Please try <br> again later.</p>
+        </section>
+    </section>
+    <div class="maintenanceOverlay"></div>
+}

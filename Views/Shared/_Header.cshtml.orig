@@ -1,0 +1,57 @@
+﻿<header id="main-header">
+	<section class="header-blue-top">
+		<h1 class="logo">
+			<a href="index.html" title="Best cruises"><img src="images/logo.png" alt="Best cruises"/></a>
+		</h1>
+		<div class="headerRight">
+			<nav>
+				<ul class="top-links">
+					<li>
+						<a href="#">Sign In</a>
+					</li>
+					<li>
+						<a href="#">Register</a>
+					</li>
+					<li>
+						<a href="#">Write A Review</a>
+					</li>
+					<li>
+						<a href="#">Currency Converter</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+    <nav>
+        <ul class="main-nav">
+            <li class="active">
+                <a href="#" title="Home">Home</a>
+            </li>
+            <li class="cruises">
+                <a href="#" title="Cruises">Flights</a>
+            </li>
+            <li>
+                <a href="#" title="News">Hotel</a>
+            </li>
+            <li>
+                <a href="#" title="Contact">Flight + Hotel</a>
+            </li>
+            <li class="active">
+                <a href="#" title="Home">Car Hire</a>
+            </li>
+            <li class="cruises">
+                <a href="#" title="Cruises">Cruises</a>
+            </li>
+            <li class="new">
+                <a href="#" title="News">Deals</a>
+            </li>
+            <li>
+                <a href="#" title="Contact">Holiday</a>
+            </li>
+            <li>
+                <a href="#" title="Contact">Extras</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!--header ends here-->
